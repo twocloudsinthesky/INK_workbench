@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拼谷工作台</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f4ec;color:#223a31;font:15px system-ui,sans-serif}main{max-width:920px;margin:auto;padding:40px 18px}.hero{background:#dfe9cf;padding:25px;border-radius:16px}h1{margin:6px 0}h2{font-size:19px}.card{background:white;border:1px solid #dfe6dc;border-radius:12px;padding:18px;margin-top:15px}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}button,input,select{font:inherit;padding:8px;border-radius:7px;border:1px solid #ced9cf}button{cursor:pointer;background:white;color:#244e43}.primary{background:#244e43;color:white}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;white-space:nowrap}td,th{padding:9px;border-bottom:1px solid #e5eae2;text-align:left}.bottle{margin-left:6px;padding:2px 7px;border:1px solid #db9f38;border-radius:20px;background:#ffdf9b;color:#633200;font-size:12px;font-weight:750}small{color:#52655b}#message{color:#873e2a}[hidden]{display:none!important}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));list-style:none;padding:0;gap:10px;margin:12px 0}.timeline li{padding:8px;border-top:3px solid #8ba98d;background:#f3f6ee;border-radius:3px 3px 8px 8px;font-size:13px}.timeline time,.timeline small{display:block;margin-top:5px}.ink-timeline{padding:12px 16px}.ink-timeline h3{margin:0;font-size:15px}
+/* Shared controls */
+:root{--control-border:#cbd8ce;--control-surface:#fbfdf9;--control-ink:#203c32;--control-accent:#48775e}
+button,input,select,textarea{font-family:inherit}
+select{appearance:none;max-width:100%;min-height:40px;border:1px solid var(--control-border);border-radius:10px;color:var(--control-ink);padding:9px 34px 9px 12px;background-color:var(--control-surface);background-image:linear-gradient(45deg,transparent 50%,var(--control-accent) 50%),linear-gradient(135deg,var(--control-accent) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
+select:hover{border-color:#82a28e;background-color:#f1f7ed}
+select:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #518565;outline-offset:2px}
+select:disabled,button:disabled{cursor:default}
+input[type=checkbox]{accent-color:#305e48}
+input[type=file]::file-selector-button{margin-right:10px;padding:7px 10px;border:1px solid var(--control-border);border-radius:7px;background:#edf4e9;color:#244e43;font:inherit;cursor:pointer}
+button,select{transition:background-color .15s,border-color .15s}
+@media(prefers-reduced-motion:reduce){button,select{transition:none}}
+
+main{padding-top:32px}
+.hero{background:linear-gradient(115deg,#e8f0dc,#d7e6c9);border:1px solid #d7e4cf}
+.hero h1{margin-bottom:16px}
+.card{box-shadow:0 2px 10px #223a3109}
+button,input:not([type=checkbox]){min-height:40px;border-radius:10px;padding:9px 12px}
+button:hover{background:#f1f7ed}
+button.primary:hover{background:#305d4c}
+.hero button{background:#f7fbf1}
+.hero button[aria-pressed=true]{background:#244e43;color:#fff;border-color:#244e43}
+tbody tr:hover{background:#f7faf4}
+#secret{width:min(280px,100%)}
+@media(max-width:520px){main{padding:18px 12px}.hero,.card{padding:14px}.actions label{max-width:100%}}
+
+.ink-timeline + .ink-timeline{border-top:1px solid #e5ebe0}
+.timeline{gap:9px}
+.timeline li{position:relative;border-top:2px solid #9bb99b;padding:13px 10px 10px;background:#f4f7f0;border-radius:7px}
+.timeline li::before{content:"";position:absolute;left:10px;top:-5px;width:8px;height:8px;border-radius:50%;background:#528263;box-shadow:0 0 0 2px #fff}
+.timeline small{font-variant-numeric:tabular-nums}
+.ink-note{white-space:pre-wrap;overflow-wrap:anywhere;padding:9px 12px;border-radius:8px;background:#edf4e7;color:#315044;font-size:13px}.claim-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:10px;margin:12px 0 20px}.claim-summary div{padding:14px;background:#edf4e7;border-radius:10px}.claim-summary strong{display:block;margin-top:4px;font-size:clamp(20px,5vw,32px);overflow-wrap:anywhere}.public-avatar{display:inline-grid;place-items:center;width:36px;height:36px;margin-right:8px;border-radius:9px;background:#cfe3bb;vertical-align:middle}#brand-avatar img{width:100%;height:100%;border-radius:inherit;object-fit:cover}</style>
+<main><section class="hero"><div id="brand-avatar" class="public-avatar">团</div><small id="brand-name">拼谷工作台</small><h1>拼谷工作台</h1><div class="actions"><button id="choose-admin">群主 / 管理员</button><button id="choose-member">团员查询</button><button id="logout" hidden>退出</button></div></section>
+<form id="login" class="card"><h2 id="login-title"></h2><p id="hint"></p><div class="actions"><label id="secret-label" for="secret"></label><input id="secret" type="text" inputmode="text" lang="zh-CN" autocomplete="off" autocapitalize="none" spellcheck="false" required maxlength="256"><label id="invite-field" hidden>群访问码 <input id="invite" type="password" autocomplete="off" maxlength="100"></label><button class="primary" id="login-button"></button></div></form>
+<p id="message" role="status"></p>
+<section class="card" id="member" hidden><h2 id="member-name"></h2><div class="claim-summary"><div>已付墨水及耗材<strong id="total-paid"></strong></div><div>未交肾总额<strong id="total-unpaid"></strong></div><div>当前认领总量<strong id="total-volume"></strong></div></div><h2>已认领墨水</h2><div class="actions"><label>办理事项 <select id="kind"><option value="details">查看认领明细</option><option value="ship">申请分装发货</option><option value="transfer">发起转单</option></select></label><button id="select-eligible" type="button">全选可提交明细</button><button id="refresh">刷新进度</button></div>
+<p id="help"></p><div class="scroll"><table><thead><tr><th id="order-choice">选择</th><th>墨水 / 规格</th><th>应收</th><th>交肾</th><th>到货</th><th>排发</th></tr></thead><tbody id="orders"></tbody></table></div>
+<p id="postage-note" hidden>非偏远 6 元 · 东三省 7 元 · 其他偏远地区 10 元起，具体金额请与群主确认。</p><p id="selection-total" aria-live="polite"></p><p id="recipient-field" hidden><label>转让毫升数 <input id="transfer-ml" type="number" min="0.001" step="0.001" placeholder="留空则整条转让"></label> <label>接单团员昵称 <input id="recipient" maxlength="256" placeholder="填写完整昵称"></label></p>
+<p><button class="primary" id="submit">提交申请</button></p><h2>我的申请</h2><ul id="history"></ul><h2>转单记录</h2><div id="transfer-list"></div><section aria-labelledby="timeline-title"><h2 id="timeline-title">墨水时间线</h2><div class="actions"><label>排序依据 <select id="time-sort"></select></label><button id="time-direction" type="button">最晚在前 ↓</button></div><div id="timelines"></div></section></section></main>
+<script>
+const $=id=>document.getElementById(id);
+let branding={name:'拼谷工作台',avatar:''};
+function applyBranding(data){
+  branding=data;
+  document.title=data.name+' · 拼谷工作台';
+  $('brand-name').textContent=data.name;
+  const icon=$('brand-avatar');
+  icon.textContent='';
+  if(data.avatar){
+    const image=document.createElement('img');
+    image.alt='';
+    image.src=data.avatar;
+    icon.append(image);
+  }else icon.textContent=Array.from(data.name)[0]??'团';
+  const locationLabel=$('location');
+  if(locationLabel&&locationLabel.textContent.includes(' / ')){
+    locationLabel.textContent=data.name+locationLabel.textContent.slice(locationLabel.textContent.indexOf(' / '));
+  }
+}
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let inviteRequired=false;
+let role='member', active=false, orders=[], requests=[];
+async function api(path,data){
+  const response=await fetch('/api/'+path,data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  const result=await response.json();
+  if(!response.ok) throw Error(result.error);
+  return result;
+}
+function updateInviteField(){
+  $('invite-field').hidden=!(inviteRequired&&role==='member');
+  $('invite').required=!$('invite-field').hidden;
+}
+let nicknameComposing=false;
+$('secret').addEventListener('compositionstart',()=>{nicknameComposing=true;});
+$('secret').addEventListener('compositionend',()=>{nicknameComposing=false;});
+function choose(next){
+  role=next;
+  updateInviteField();
+  $('invite').value='';
+  $('choose-admin').setAttribute('aria-pressed',String(next==='admin'));
+  $('choose-member').setAttribute('aria-pressed',String(next==='member'));
+  $('login-title').textContent=next==='admin'?'群主 / 管理员':'团员查询';
+  $('secret-label').textContent=next==='admin'?'管理员密码':'完整昵称';
+  $('secret').type=next==='admin'?'password':'text';
+  $('secret').autocomplete=next==='admin'?'current-password':'off';
+  $('secret').value='';
+  $('login-button').textContent='进入';
+  $('hint').textContent=next==='admin'?'请输入管理员密码。':'填写排表里的完整昵称。';
+}
+function showError(error){$('message').textContent=error.message;}
+function amount(r){
+  return r.manualAmount??(r.qty*r.price+(r.chargedFee??0));
+}
+function checkedOrders(){
+  return [...$('orders').querySelectorAll('input:checked')].map(input=>orders[Number(input.value)]);
+}
+function updateSelection(){
+  const selected=checkedOrders();
+  $('selection-total').textContent=selected.length?'已选 '+selected.length+' 条':'';
+}
+$('orders').onchange=updateSelection;
+$('select-eligible').onclick=()=>{
+  for(const input of $('orders').querySelectorAll('input[type="checkbox"]')) input.checked=true;
+  updateSelection();
+};
+const timelineFields=[['opened','成团'],['deadline','交肾截止'],['ready','可排发']];
+function timelineHtml(dates={}, records=[]){
+  const stages=timelineFields.map(([key,label])=>[label,dates[key]?esc(dates[key].replace('T',' ')):'待公布']);
+  const arrivalTimes=[...new Set(records.filter(r=>r.arrived&&r.arrivedAt).map(r=>r.arrivedAt))].sort();
+  if(arrivalTimes.length){
+    const times=arrivalTimes.map(date=>esc(new Date(date).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false})));
+    if(records.some(r=>r.arrived&&!r.arrivedAt)) times.push('部分归仓时间未登记');
+    if(records.some(r=>!r.arrived)) times.push('部分明细待归仓');
+    stages[2]=['可排发 · 已归仓',times.join('<br>')];
+  }else if(records.some(r=>r.arrived)){
+    stages[2]=['可排发 · 已归仓','实际时间未登记'+(records.some(r=>!r.arrived)?' · 部分明细待归仓':'')+(dates.ready?'<br>原计划 '+esc(dates.ready.replace('T',' ')):'')];
+  }
+  return '<ol class="timeline">'+stages.map(([label,date])=>'<li><strong>'+label+'</strong><small>'+date+'</small></li>').join('')+'</ol>';
+}
+let schedules={};
+let transfers=[];
+let timeDirection=-1;
+$('time-sort').innerHTML=timelineFields.map(([key,label])=>'<option value="'+key+'">'+label+'</option>').join('');
+$('time-sort').onchange=renderTimelines;
+$('time-direction').onclick=()=>{
+  timeDirection*=-1;
+  $('time-direction').textContent=timeDirection===1?'最早在前 ↑':'最晚在前 ↓';
+  renderTimelines();
+};
+function renderTimelines(){
+  const key=$('time-sort').value;
+  const byInk=new Map();
+  for(const row of orders){
+    if(!byInk.has(row.group)) byInk.set(row.group,[]);
+    byInk.get(row.group).push(row);
+  }
+  const dated=[...byInk].map(([ink,records])=>{
+    const planned=schedules[ink]?.[key];
+    const actual=key==='ready'
+      ? records.filter(r=>r.arrived&&r.arrivedAt).map(r=>Date.parse(r.arrivedAt)).filter(Number.isFinite)
+      : [];
+    const time=actual.length?Math.min(...actual):planned?Date.parse(planned+'+08:00'):NaN;
+    return {ink,records,time:Number.isFinite(time)?time:null};
+  });
+  dated.sort((a,b)=>a.time==null?(b.time==null?0:1):b.time==null?-1:timeDirection*(a.time-b.time));
+  $('timelines').innerHTML=dated.map(({ink,records})=>'<div class="ink-timeline"><h3>'+esc(ink)+' · 北京时间</h3>'+
+    (schedules[ink]?.note?'<p class="ink-note">备注 · '+esc(schedules[ink].note)+'</p>':'')+
+    timelineHtml(schedules[ink],records)+'</div>').join('')||'<p>暂无墨水时间线。</p>';
+}
+function display(){
+  renderTimelines();
+  const kind=$('kind').value;
+  const detail=kind==='details';
+  const paid=orders.filter(r=>r.canProof&&r.paid).reduce((sum,r)=>sum+amount(r),0);
+  const volume=orders.reduce((sum,r)=>sum+(r.cancelled?0:r.ownedVolumeMl??0),0);
+  $('total-paid').textContent='¥'+(paid/100).toFixed(2);
+  const unpaid=orders.filter(r=>r.canProof&&!r.paid&&!r.cancelled).reduce((sum,r)=>sum+amount(r),0);
+  $('total-unpaid').textContent='¥'+(unpaid/100).toFixed(2);
+  $('total-volume').textContent=Number(volume.toFixed(3))+' ml';
+  for(const id of ['select-eligible','submit','order-choice','help']) $(id).hidden=detail;
+  $('postage-note').hidden=kind!=='ship';
+  const pending=new Set(requests.filter(r=>r.kind===kind&&r.status==='待审核').flatMap(r=>r.ids));
+  $('help').textContent='确认明细已归仓并核款后，勾选想一起发货的墨水。';
+  $('recipient-field').hidden=kind!=='transfer';
+  if(kind==='transfer') $('help').textContent='勾选要转出的明细，填写接单人昵称。填写毫升数时只勾选一条明细。原认领人按原肾表交肾，转单款由双方自行结算。';
+  const pendingTransfers=new Set(transfers.filter(t=>t.status==='待接单').flatMap(t=>t.ids));
+  $('orders').innerHTML=orders.map((r,i)=>{
+    const eligible=!detail&&!r.cancelled&&r.canShip&&!r.ship&&!pendingTransfers.has(r.id)&&(kind==='transfer'||r.paid&&r.arrived)&&!pending.has(r.id);
+    const bottle=r.wantsBottle===true;
+    return '<tr>'+(detail?'':'<td>'+(eligible?'<input type="checkbox" value="'+i+'" aria-label="'+esc(r.group+' '+r.item)+'">':pending.has(r.id)?'待审核':'—')+'</td>')+'<td>'+esc(r.group)+(r.cancelled?'<span class="bottle">已散团</span>':'')+(bottle?'<span class="bottle">要瓶</span>':'')+'<br><small>'+(r.ownedVolumeMl===0&&!r.canShip?'已全部转出':(r.volumeMl??((r.ml??0)*r.qty))?esc(r.volumeMl??(r.ml*r.qty))+' ml':esc(r.item)+' × '+(r.bottleOnly?r.bottleCount:r.qty))+(r.fulfillmentMember&&r.fulfillmentMember!==r.member?'<br>接单：'+esc(r.fulfillmentMember):'')+'</small></td><td>'+(r.canProof?'¥'+(amount(r)/100).toFixed(2):'原认领人交肾')+'</td><td>'+(r.paid?'已交肾':'未交肾')+'</td><td>'+(r.arrived?'已归仓':'未归仓')+'</td><td>'+['未排发','已排发','已寄出'][r.ship]+((kind==='ship'||r.ship||r.postagePaid)&&r.canShip?'<br><small>'+(r.postagePaid===true?'已付邮费':'邮费待确认')+'</small>':'')+(r.tracking?'<br><small>'+esc(r.tracking)+'</small>':'')+'</td></tr>';
+  }).join('')||'<tr><td colspan="'+(detail?5:6)+'">暂无明细</td></tr>';
+  updateSelection();
+  $('history').innerHTML=requests.map(r=>'<li>'+(r.kind==='proof'?'付款确认':'排发申请')+' · '+r.ids.length+' 条 · '+esc(r.status)+'</li>').join('')||'<li>暂无申请</li>';
+}
+function renderTransfers(){
+  const name=$('member-name').textContent;
+  $('transfer-list').innerHTML=transfers.map(t=>{
+    const buttons=t.status!=='待接单'?'':t.recipient===name
+      ? '<button data-transfer="accept">确认接单</button> <button data-transfer="reject">拒绝</button>'
+      : '<button data-transfer="cancel">撤回</button>';
+    const items=t.items.map(r=>esc(r.group+' · '+(t.volume_ml==null?r.item+' × '+r.qty:t.volume_ml+' ml'))).join('<br>');
+    return '<div class="card" data-id="'+t.id+'"><strong>'+esc(t.sender)+' → '+esc(t.recipient)+' · '+esc(t.status)+'</strong><p>'+items+'</p>'+buttons+'</div>';
+  }).join('')||'<small>暂无转单</small>';
+}
+$('transfer-list').onclick=async event=>{
+  const button=event.target.closest('[data-transfer]');
+  if(!button) return;
+  button.disabled=true;
+  try{
+    await api('member/transfer-response',{id:Number(button.closest('[data-id]').dataset.id),action:button.dataset.transfer});
+    $('message').textContent=button.dataset.transfer==='accept'?'已接单，管理端可查看通知。':'转单状态已更新。';
+    await refresh();
+  }catch(error){showError(error);button.disabled=false;}
+};
+async function refresh(){
+  const [data,history]=await Promise.all([api('member/rows'),api('member/transfers')]);orders=data.rows;requests=data.requests;schedules=data.schedules??{};transfers=history.transfers;display();renderTransfers();
+}
+async function activate(name){
+  active=true;$('member-name').textContent=name;$('member').hidden=false;$('login').hidden=true;$('logout').hidden=false;
+  await refresh();
+}
+async function switchTo(next){
+  if(active){await api('logout',{});active=false;$('member').hidden=true;$('logout').hidden=true;}
+  $('login').hidden=false;$('message').textContent='';choose(next);
+}
+$('choose-admin').onclick=()=>switchTo('admin').catch(showError);
+$('choose-member').onclick=()=>switchTo('member').catch(showError);
+$('logout').onclick=()=>switchTo('member').catch(showError);
+$('login').onsubmit=async event=>{
+  event.preventDefault();
+  if(nicknameComposing) return;
+  $('message').textContent='';
+  try{
+    await api('login',{role,secret:$('secret').value,invite:$('invite').value});
+    if(role==='admin') location.assign('/admin');
+    else {const session=await api('session');await activate(session.member);}
+  }catch(error){showError(error);}
+};
+$('kind').onchange=display;
+$('refresh').onclick=()=>refresh().catch(showError);
+$('submit').onclick=async()=>{
+  $('message').textContent='';$('submit').disabled=true;
+  try{
+    const kind=$('kind').value;
+    if(kind==='details') return;
+    const ids=checkedOrders().map(row=>row.id);
+    if(!ids.length) throw Error('请先勾选明细。');
+    if(kind==='transfer'){
+      const field=$('transfer-ml');
+      const volumeMl=field.value===''?null:Number(field.value);
+      if(!field.checkValidity()||(volumeMl!==null&&ids.length!==1)) throw Error('填写转让毫升数时，请只勾选一条明细，并填写有效用量。');
+      await api('member/transfer',{ids,volumeMl,recipient:$('recipient').value.trim()});
+      $('recipient').value='';field.value='';$('message').textContent='已发起转单，等待接单人确认。';
+      await refresh();return;
+    }
+    await api('member/request',{kind,ids});
+    $('message').textContent='已提交，等待管理员审核。';
+    await refresh();
+  }catch(error){showError(error);}finally{$('submit').disabled=false;}
+};
+choose(location.hash==='#admin'?'admin':'member');
+api('session').then(session=>{
+  inviteRequired=session.inviteRequired===true;
+  if(session.role==='member'&&role==='member') return activate(session.member);
+  if(session.role==='admin'&&role==='admin') return location.assign('/admin');
+  updateInviteField();
+}).catch(showError);
+api('branding').then(applyBranding).catch(()=>{});
+</script>

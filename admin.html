@@ -1,0 +1,1415 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>拼谷工作台</title>
+<style>
+:root{font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:#202933;background:#f3f4ee;--green:#244e43;--line:#e2e6dd;--muted:#58655d}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,select{cursor:pointer}button{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #487b66;outline-offset:2px}.layout{display:grid;grid-template-columns:226px minmax(0,1fr);min-height:100vh}aside{background:#162f2b;color:#f7f9ed;padding:32px 22px;display:flex;flex-direction:column;gap:33px}.brand{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:750}.mark{width:39px;height:39px;border-radius:12px;background:#d7e9a9;color:#163a2f;display:grid;place-items:center;font:700 22px serif}.brand small{display:block;font-size:11px;color:#bdd2c6;font-weight:500;margin-top:4px}nav{display:grid;gap:7px}nav button{border:0;text-align:left;padding:13px;border-radius:9px;background:transparent;color:#d6e4da}nav button[aria-current=page]{background:#31544a;color:#fff}nav span{display:inline-block;width:28px}.aside-note{margin-top:auto;font-size:12px;color:#bbd0c5;line-height:1.8}main{min-width:0;padding:28px clamp(18px,4vw,58px) 48px;max-width:1500px;width:100%;margin:auto auto auto 0}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}.actions,.filters,.batch,.form-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.btn{padding:9px 14px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:13px;white-space:nowrap}.primary{background:var(--green);border-color:var(--green);color:white}.btn:hover{filter:brightness(.95)}.btn:disabled{opacity:.48;cursor:default}.hero{padding:32px 35px;border-radius:16px;background:#dfe9cf;position:relative;overflow:hidden;isolation:isolate}.hero:after{content:"";position:absolute;z-index:-1;inset:-165px -105px auto auto;width:495px;height:410px;border-radius:50%;transform:rotate(-21deg);background:repeating-radial-gradient(ellipse at center,#72907b55 0 1px,transparent 2px 17px);mask-image:linear-gradient(95deg,transparent,#000 36%)}h1{font-size:clamp(28px,4vw,41px);margin:8px 0 10px;letter-spacing:-.04em}h2{font-size:19px;margin:0}.hero p{margin:0;line-height:1.65;color:#38564c;font-size:14px}.eyebrow{font-size:12px;font-weight:700;color:#35554a}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:17px 0 23px}.stat{padding:16px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px}.stat b{display:block;font-size:27px;margin:7px 0 2px;font-variant-numeric:tabular-nums}.stat span{font-size:12px;color:var(--muted)}.stat[aria-pressed=true]{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#548a70;margin-right:7px}.dot.gold{background:#c99745}.dot.blue{background:#6884a3}.dot.lilac{background:#8975a4}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:19px;overflow:hidden}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 18px;flex-wrap:wrap}.panel-head p{font-size:12px;color:var(--muted);margin:5px 0 0}.filters{padding:0 18px 14px}.filters input,.filters select,dialog input,dialog textarea{border:1px solid #dce2d8;padding:9px 11px;border-radius:8px;background:#fbfcfa;color:inherit;font-size:13px;min-width:0}.filters input{flex:1;min-width:150px}.batch{background:#edf4e7;padding:9px 18px;font-size:13px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px;text-align:left;white-space:nowrap}th,td{padding:12px 13px;border-top:1px solid #edf0e9}th{color:#536158;background:#f7f8f4;font-size:12px;font-weight:650}th:first-child,td:first-child{padding-left:18px}td small{display:block;color:var(--muted);margin-top:4px}.money{font-variant-numeric:tabular-nums}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#eef1ec;color:#465349;font-size:12px}.pill.bottle{margin-left:7px;background:#ffdf9b;color:#633200;border:1px solid #db9f38;font-weight:750}.pill.good{background:#e4f0e7;color:#285642}.pill.wait{background:#f7eddb;color:#725019}.pill.ship{background:#ece8f6;color:#573f7b}.pill.arrival{background:#e7eef8;color:#354e70}.link{background:none;border:none;color:var(--green);padding:4px 0;font-weight:650}.footer{padding:12px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.empty{text-align:center;padding:38px;color:var(--muted)}.notice{margin-top:17px;color:#4e5d54;font-size:12px;line-height:1.65}.toast{position:fixed;bottom:20px;right:20px;background:#163a2f;color:white;padding:12px 16px;border-radius:9px;z-index:4;max-width:calc(100% - 40px)}[hidden]{display:none!important}dialog{width:min(590px,calc(100% - 26px));border:1px solid var(--line);border-radius:15px;padding:22px;color:inherit}dialog::backdrop{background:#172e2b80}dialog label{display:grid;gap:5px;margin:12px 0;font-size:13px}dialog p{font-size:13px;color:var(--muted);line-height:1.65}textarea{min-height:130px;resize:vertical}.form-actions{justify-content:flex-end;margin-top:14px}fieldset{border:1px solid var(--line);border-radius:8px;margin:12px 0;padding:0 12px 8px}legend{font-size:13px;font-weight:650}.container-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.container-fields label{margin:5px 0}.container-fields input{width:100%}.err{color:#9c3428!important}.snapshot aside{display:none}.snapshot .layout{display:block}.snapshot main{margin:auto;max-width:1000px}@media(max-width:740px){.layout{display:block}aside{padding:13px 16px;gap:10px}nav{display:flex;overflow:auto}nav button{white-space:nowrap;padding:9px}nav span,.aside-note{display:none}main{padding-top:16px}.hero{padding:23px}.stats{grid-template-columns:repeat(2,1fr)}.top{flex-wrap:wrap}}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));list-style:none;padding:0;gap:10px;margin:12px 0}.timeline li{padding:8px;border-top:3px solid #8ba98d;background:#f3f6ee;border-radius:3px 3px 8px 8px;font-size:13px}.timeline time,.timeline small{display:block;margin-top:5px}.ink-timeline{padding:12px 16px}.ink-timeline h3{margin:0;font-size:15px}
+/* Shared controls */
+:root{--control-border:#cbd8ce;--control-surface:#fbfdf9;--control-ink:#203c32;--control-accent:#48775e}
+button,input,select,textarea{font-family:inherit}
+select{appearance:none;max-width:100%;min-height:40px;border:1px solid var(--control-border);border-radius:10px;color:var(--control-ink);padding:9px 34px 9px 12px;background-color:var(--control-surface);background-image:linear-gradient(45deg,transparent 50%,var(--control-accent) 50%),linear-gradient(135deg,var(--control-accent) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
+select:hover{border-color:#82a28e;background-color:#f1f7ed}
+select:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #518565;outline-offset:2px}
+select:disabled,button:disabled{cursor:default}
+input[type=checkbox]{accent-color:#305e48}
+input[type=file]::file-selector-button{margin-right:10px;padding:7px 10px;border:1px solid var(--control-border);border-radius:7px;background:#edf4e9;color:#244e43;font:inherit;cursor:pointer}
+button,select{transition:background-color .15s,border-color .15s}
+@media(prefers-reduced-motion:reduce){button,select{transition:none}}
+
+body{background:#f2f4ee}
+main{margin:0 auto 0 0}
+.hero{background:linear-gradient(108deg,#e6efda,#dbe8cc)}
+.panel,.stat{box-shadow:0 2px 8px #263e2d08}
+.filters select{padding:9px 34px 9px 12px;border-color:var(--control-border);background-color:var(--control-surface);background-image:linear-gradient(45deg,transparent 50%,var(--control-accent) 50%),linear-gradient(135deg,var(--control-accent) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.filters select:hover{background-color:#f1f7ed;border-color:#82a28e}
+.filters input{min-height:40px}
+.btn{min-height:38px;border-radius:10px}
+.scroll tbody tr:hover{background:#f7faf4}
+dialog{max-height:calc(100dvh - 32px);border-radius:19px;padding:24px;box-shadow:0 24px 75px #0c2b2440}
+dialog select{width:100%;font-size:13px}
+dialog input:not([type=checkbox]),dialog textarea{min-height:40px}
+dialog::backdrop{background:#132f2985;backdrop-filter:blur(3px)}
+.form-actions{padding-top:14px;border-top:1px solid #e8ede4}
+@media(max-width:520px){.filters select{flex:1;min-width:0}.filters input{flex:1 0 100%}dialog{padding:17px}.top .actions{gap:6px}}
+
+.ink-timeline + .ink-timeline{border-top:1px solid #e5ebe0}
+.timeline{gap:9px}
+.timeline li{position:relative;border-top:2px solid #9bb99b;padding:13px 10px 10px;background:#f4f7f0;border-radius:7px}
+.timeline li::before{content:"";position:absolute;left:10px;top:-5px;width:8px;height:8px;border-radius:50%;background:#528263;box-shadow:0 0 0 2px #fff}
+.timeline small{font-variant-numeric:tabular-nums}
+.fee-alert{margin-top:18px;padding:15px 18px;border:1px solid #d69c3a;border-left:5px solid #b5700e;border-radius:11px;background:#fff2d5;color:#5b350c}.fee-alert h2{font-size:17px}.fee-alert p{margin:6px 0;font-size:13px}.fee-alert ul{margin:8px 0 0;padding-left:20px}.fee-alert li{margin:4px 0}.fee-alert .link{color:#653b0f;text-align:left;text-decoration:underline}.fee-alert .money{margin-left:8px;font-weight:750}.btn.danger{color:#9d332d;border-color:#e2b3ad;background:#fff7f5}.btn.danger:hover{background:#fde9e5}.ink-note{white-space:pre-wrap;overflow-wrap:anywhere;padding:9px 12px;border-radius:8px;background:#edf4e7;color:#315044;font-size:13px}.amount-sort{display:inline-flex;align-items:center;gap:4px;color:inherit;white-space:nowrap}.amount-sort:hover{color:var(--green);text-decoration:underline}.time-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.time-ink-link{font-size:inherit;text-align:left;text-decoration:underline;text-underline-offset:3px}.order-ink + .order-ink{border-top:1px solid var(--line)}.order-ink-toggle{font-size:inherit;text-align:left}.order-ink-count{margin:4px 0 8px;color:var(--muted);font-size:12px}[data-ink-title]{cursor:pointer}.filters #query{min-width:0}.public-avatar{display:inline-grid;place-items:center;width:36px;height:36px;margin-right:8px;border-radius:9px;background:#cfe3bb;vertical-align:middle}#brand-avatar img{width:100%;height:100%;border-radius:inherit;object-fit:cover}</style></head>
+<body><div class="layout"><aside><div class="brand"><div class="mark" id="brand-avatar">团</div><div><span id="brand-name">拼谷工作台</span><small>拼谷工作台</small></div></div><nav aria-label="功能导航"><button data-view="desk"><span>▦</span>拼谷总览</button><button data-view="bill"><span>▤</span>肾表管理</button><button data-view="ship"><span>◇</span>排发管理</button><button data-view="time"><span aria-hidden="true">◷</span>按时间管理</button><button data-view="member"><span>◎</span>团员查询</button></nav><div class="aside-note">群主 / 管理员工作台</div></aside>
+<main><div class="top"><span id="location"></span><div class="actions" id="top-actions"><button class="btn" id="branding-open">团设置</button><button class="btn" id="members-open">管理墨水团员</button><button class="btn primary" id="scope-open">批量操作</button><button class="btn" id="timeline-open">时间线 / 备注</button><button class="btn" id="transfer-open">转单通知</button><button class="btn" id="review-open">审核申请</button><button class="btn" id="logout">退出</button><button class="btn" id="backup">数据备份</button><button class="btn primary" id="import-open">＋ 导入排表</button></div></div><section class="hero"><div id="eyebrow" class="eyebrow"></div><h1 id="title"></h1><p id="subtitle"></p></section><section id="stats" class="stats" aria-label="进度统计"></section><section id="fee-alert" class="fee-alert" aria-live="polite" hidden></section><section id="panel" class="panel"><div id="panel-head"></div>
+<div class="filters"><input id="query" aria-label="搜索明细" autocomplete="off"><button type="button" class="btn" id="query-clear">清空</button><select id="group" aria-label="按墨水筛选"></select><select id="status" aria-label="按状态筛选"></select></div>
+<div id="panel-results"></div></section><section id="timelines" class="panel" hidden></section><p class="notice" id="notice"></p></main></div>
+
+<dialog id="branding-dialog"><h2>团设置</h2><label>团名称<input id="branding-name" maxlength="24"></label><label>团头像（PNG / JPG，280 KB 以内）<input id="branding-avatar" type="file" accept="image/png,image/jpeg"></label><label><input id="branding-remove" type="checkbox">移除头像</label><p id="branding-error" role="alert"></p><div class="form-actions"><button class="btn" data-close="branding-dialog">关闭</button><button class="btn primary" id="branding-save">保存</button></div></dialog>
+<dialog id="reprice-dialog"><h2>整瓶改价</h2><p id="reprice-ink"></p>
+<label>整瓶价格（元）<input id="reprice-price" inputmode="decimal"></label>
+<label>整瓶容量（ml）<input id="reprice-capacity" type="number" min="0.001" step="0.001"></label>
+<p>按原分装规格折算到分。手动应收、耗材和付款状态保留。已付款价差请按实收记录核对。</p>
+<p id="reprice-result" role="status"></p><div class="form-actions"><button class="btn" data-close="reprice-dialog">关闭</button><button class="btn" id="reprice-preview">预览</button><button class="btn primary" id="reprice-apply" disabled>确认改价</button></div></dialog>
+<dialog id="bill-image-dialog"><h2>肾表图片</h2>
+<p id="bill-image-page" aria-live="polite"></p>
+<p class="notice">苹果手机请长按图片后保存</p>
+<img id="bill-image-preview" alt="肾表图片预览" style="display:block;width:100%;height:auto;border-radius:8px">
+<div class="form-actions"><button class="btn" data-close="bill-image-dialog">关闭</button>
+<button class="btn" id="bill-image-prev">上一张</button><button class="btn" id="bill-image-next">下一张</button>
+<button class="btn primary" id="bill-image-download">下载 JPG</button></div></dialog>
+<dialog id="members-dialog"><h2>管理墨水团员</h2>
+<label>墨水<select id="members-ink"></select></label>
+<label>操作<select id="members-action"><option value="add">添加认领</option><option value="remove">移除团员</option></select></label>
+<div id="members-add"><label>团员完整昵称<input id="members-name" maxlength="256"></label>
+<label>规格<input id="members-spec" placeholder="例如 5ml"></label>
+<label>份数<input id="members-qty" type="number" min="1" step="1" value="1"></label>
+<label>每份墨水单价（元）<input id="members-price" inputmode="decimal"></label>
+<label><span><input type="checkbox" id="members-bottle"> 要瓶</span></label></div>
+<div id="members-remove" hidden><label>团员<select id="members-existing"></select></label><p id="members-impact" role="status"></p></div>
+<p id="members-error" class="err" role="alert"></p>
+<div class="form-actions"><button class="btn" data-close="members-dialog">关闭</button><button class="btn primary" id="members-save">保存</button></div></dialog>
+<dialog id="scope-dialog"><h2>批量操作</h2>
+<label>操作<select id="scope-action"><option value="paid">确认交肾</option><option value="queued">加入排发</option><option value="arrived">按墨水一键到货</option></select></label>
+<label id="scope-mode-label">范围<select id="scope-mode"><option value="member">按团员</option><option value="ink">按墨水</option></select></label><label id="scope-name"><span>团员</span><select id="scope-target"></select></label>
+<p id="scope-help"></p><p id="scope-summary" role="status"></p><p class="err" id="scope-error" role="alert"></p>
+<div class="form-actions"><button class="btn" data-close="scope-dialog">关闭</button><button class="btn" id="scope-preview">预览</button><button class="btn primary" id="scope-apply" disabled>确认更新</button></div></dialog>
+<dialog id="transfer-dialog"><h2>转单通知</h2><p>接单团员确认后，群主在这里查看。原认领人仍按原肾表交肾。</p><div id="transfer-list"></div><div class="form-actions"><button class="btn" data-close="transfer-dialog">关闭</button></div></dialog><dialog id="timeline-dialog"><h2>编辑墨水时间线与备注</h2><p>使用北京时间。时间留空时显示待公布。</p><label>墨水 <select id="timeline-ink"></select></label><div id="timeline-fields"></div><label>墨水备注<textarea id="timeline-note" maxlength="500" placeholder="例如：本次耗材为国产田宫瓶"></textarea></label><p class="err" id="timeline-error" role="alert"></p><div class="form-actions"><button class="btn" data-close="timeline-dialog">关闭</button><button class="btn primary" id="timeline-save">保存</button></div></dialog><dialog id="review-dialog"><h2>团员申请</h2><p>收到团员付款确认后，请核对支付宝实收与备注，再通过交肾申请。通过排发申请会将明细标为已排发。</p><label>筛选申请 <select id="review-filter"><option value="pending">待审核</option><option value="all">全部申请</option></select></label><div id="review-list"></div><div class="form-actions"><button class="btn" data-close="review-dialog">关闭</button></div></dialog><dialog id="import-dialog"><h2>导入排表</h2><p>可一次选中多份 QQ 拼谷助手导出的 .xlsx，或粘贴单份排表。批量导入使用各文件的表内名称。重复昵称按规格合计份数和毫升数。「瓶子」列只生成要瓶标签，表内标价不计入应收。新导入的每种墨水给未标记要瓶的团员默认登记 1 支冷冻管，合计 10 ml 默认用 1 个玻璃瓶，15 ml 默认用 1 个玻璃瓶加 1 支冷冻管，可手动修改。</p><label>墨水名称（可选）<input id="import-name" placeholder="留空时使用表内名称"></label><label>选择排表文件<input type="file" id="import-file" multiple accept=".xlsx,.csv,.tsv,.txt"></label><label>排表内容<textarea id="import-text" inputmode="text" lang="zh-CN" spellcheck="false" placeholder="在拼谷助手点「复制」，然后把完整排表粘贴到这里"></textarea></label><button type="button" class="link" id="template">下载 CSV 模板</button><p id="import-summary" aria-live="polite"></p><p id="import-error" class="err" role="alert"></p><div class="form-actions"><button class="btn" data-close="import-dialog">取消</button><button class="btn" id="preview-import">校验排表</button><button class="btn primary" id="commit-import" disabled>确认导入</button></div></dialog>
+<dialog id="edit-dialog"><h2>更新订单进度</h2><p id="edit-info"></p><label>认领总量（ml）<input id="edit-volume" type="number" min="0.001" max="1000000" step="0.001"></label><label>手动应收总额（元）<input id="edit-amount" inputmode="decimal" placeholder="留空使用自动计价"></label><p id="edit-auto-amount"></p><fieldset><legend>使用的容器</legend><p>有要瓶团员时，由其承担同团冷冻管和玻璃瓶费。没有要瓶团员时，按各自使用的耗材计入应收。田宫瓶由买分装的团员在小程序链接另下单，金额单列。</p><label><span><input type="checkbox" id="wants-bottle"> 标记要瓶（可先标记，稍后补容器）</span></label><div id="container-fields" class="container-fields"></div><p id="container-total" aria-live="polite"></p><label id="legacy-fee-label" hidden><span><input type="checkbox" id="replace-legacy-fee"> 用容器明细替换原手填耗材费</span></label></fieldset><label>分装进度 / 去向<input id="edit-location" maxlength="100" placeholder="如：已寄到分装团友处，待归仓"></label><label>交肾 <select id="edit-paid"><option value="false">未交肾</option><option value="true">已交肾</option></select></label><label>到货 <select id="edit-arrived"><option value="false">未到货</option><option value="true">已到货（分装已归仓）</option></select></label><label>排发 <select id="edit-shipping"><option value="0">未排发</option><option value="1">已排发</option><option value="2">已寄出</option></select></label><label>邮费状态 <select id="edit-postage"><option value="pending">邮费待确认</option><option value="paid">已付邮费</option></select></label><label>快递单号 <input id="edit-tracking" maxlength="100"></label><p class="err" id="edit-error" role="alert"></p><div class="form-actions"><button class="btn" data-close="edit-dialog">取消</button><button class="btn" id="split-edit">拆分份数</button><button class="btn primary" id="save-edit">保存进度</button></div></dialog>
+<dialog id="backup-dialog"><h2>数据备份</h2><p>下载全部记录，或从备份文件恢复。恢复会替换工作台内的记录。</p><label>选择 JSON 备份<input type="file" id="restore-file" accept=".json"></label><p id="backup-error" class="err" role="alert"></p><div class="form-actions"><button class="btn" data-close="backup-dialog">关闭</button><button class="btn" id="restore">恢复备份</button><button class="btn primary" id="download-backup">下载备份</button></div></dialog><div id="toast" class="toast" role="status" hidden></div>
+<script>
+const $ = id => document.getElementById(id);
+let branding={name:'拼谷工作台',avatar:''};
+function applyBranding(data){
+  branding=data;
+  document.title=data.name+' · 拼谷工作台';
+  $('brand-name').textContent=data.name;
+  const icon=$('brand-avatar');
+  icon.textContent='';
+  if(data.avatar){
+    const image=document.createElement('img');
+    image.alt='';
+    image.src=data.avatar;
+    icon.append(image);
+  }else icon.textContent=Array.from(data.name)[0]??'团';
+  const locationLabel=$('location');
+  if(locationLabel&&locationLabel.textContent.includes(' / ')){
+    locationLabel.textContent=data.name+locationLabel.textContent.slice(locationLabel.textContent.indexOf(' / '));
+  }
+}
+const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const money = cents => '¥' + (cents / 100).toFixed(2);
+const sum = rows => rows.reduce((total, row) => total + amount(row), 0);
+const key = 'moshui-orders-v1';
+const containers = [
+  {id:'tube', name:'冷冻管', price:30},
+  {id:'glass', name:'玻璃瓶', price:70},
+  {id:'tamiya5', name:'国产田宫瓶 5 ml', price:150, separate:true},
+  {id:'tamiya10', name:'国产田宫瓶 10 ml', price:110, separate:true},
+];
+function validContainers(counts) {
+  return counts && typeof counts==='object' && !Array.isArray(counts) &&
+    Object.entries(counts).every(([id,count])=>containers.some(c=>c.id===id) &&
+      Number.isSafeInteger(count) && count>=0 && count<=999999);
+}
+function containerAmount(row,separate=false) {
+  if (!row.containers) return separate?0:(row.fee??0);
+  return containers.reduce((total,c)=>total+(Boolean(c.separate)===separate?c.price*(row.containers[c.id]??0):0),0);
+}
+function containerDetails(list,separate=false) {
+  return containers.filter(c=>Boolean(c.separate)===separate).flatMap(c=>{
+    const count=list.reduce((total,row)=>total+(row.containers?.[c.id]??0),0);
+    return count?[c.name+' × '+count]:[];
+  }).join('、');
+}
+function containerUsage(row,separate) {
+  const fee=containerAmount(row,separate);
+  if (!fee) return '';
+  const details=separate?containerDetails([row],true):regularDetails([row]);
+  const prefix=separate?'另单':'使用';
+  const deduplicated=!separate&&effectiveCosts.get(row.id)===0;
+  return '<small>'+prefix+esc(details)+'（'+money(fee)+'）'+(deduplicated?' · 重复默认容器已去重':'')+'</small>';
+}
+function wantsBottle(row) {
+  return row.wantsBottle===true;
+}
+function regularDetails(list) {
+  return [containerDetails(list),list.some(r=>!r.containers&&r.fee)?'含原手填耗材':''].filter(Boolean).join('、');
+}
+function costsCell(fee,details) {
+  return money(fee)+(details?'<small>'+esc(details)+'</small>':'');
+}
+
+function validRow(r) {
+  return r && ['id','group','member','item'].every(k => typeof r[k] === 'string' && r[k].trim()) &&
+    Number.isSafeInteger(r.qty) && r.qty > 0 && Number.isSafeInteger(r.price) && r.price >= 0 &&
+    Number.isSafeInteger(r.qty * r.price) && typeof r.paid === 'boolean' && typeof r.arrived === 'boolean' &&
+    [0,1,2].includes(r.ship) && (!r.ship || (r.paid && r.arrived)) && typeof r.tracking === 'string' && (r.wantsBottle===undefined || typeof r.wantsBottle==='boolean') && (r.fee===undefined || (Number.isSafeInteger(r.fee) && r.fee>=0)) &&
+    (r.ml===undefined || (Number.isFinite(r.ml) && r.ml>=0)) && (r.handoff===undefined || typeof r.handoff==='string');
+}
+let rows=[];
+let excludedMembers=new Set();
+let chargedFees=new Map();
+let effectiveCosts=new Map();
+let schedules={};
+let transfers=[];
+let fulfillment=new Map();
+const transferred=r=>Boolean(r.billingSource)||r.billingVolume!=null||fulfillment.has(r.id);
+const recipientOf=r=>fulfillment.get(r.id)??r.member;
+let revision=0;
+let saving=false;
+let storageError=false;
+async function api(path,data) {
+  const response=await fetch('/api/'+path,data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  const result=await response.json();
+  if (!response.ok) throw Error(result.error);
+  return result;
+}
+async function loadRows() {
+  const [result,calendar]=await Promise.all([api('admin/rows'),api('admin/schedules'),refreshTransfers()]);
+  schedules=calendar.schedules;
+  rows=result.rows;
+  excludedMembers=new Set((result.excluded??[]).map(pair=>JSON.stringify(pair)));
+  revision=result.revision;
+}
+const views = {
+  ink:['墨水明细','查看和处理这款墨水的认领明细。'],
+  desk:['拼谷总览','按墨水查看订单、收款、到货和排发进度。'],
+  bill:['肾表管理','按墨水和团员汇总应收、已收与待收金额。'],
+  ship:['排发管理','已交肾且分装已归仓的明细可以加入排发。'],
+  time:['按时间管理','查看成团、交肾截止和可排发时间。'],
+  member:['团员查询','输入完整团员名，查看认领明细和各项进度。']
+};
+let view = 'desk';
+let timeSort='deadline', timeDirection=1;
+let query = '';
+let group = '', status = '', editId = null;
+let selected = new Set();
+let amountSort=0;
+const expandedOrders=new Set();
+let toastTimer;
+const statuses = {
+  unpaid:['未交肾',r=>!r.paid,'gold'],
+  paid:['已交肾',r=>r.paid,''],
+  unarrived:['未到货',r=>!r.arrived,'blue'],
+  ready:['可排发',r=>r.paid && r.arrived && !r.ship,''],
+  bottle:['要瓶',wantsBottle,'gold'],
+  postagePending:['邮费待确认',r=>r.postagePaid!==true,'gold'],
+  postagePaid:['已付邮费',r=>r.postagePaid===true,''],
+  queued:['已排发',r=>r.ship===1,'lilac'],
+  sent:['已寄出',r=>r.ship===2,'']
+};
+const unique = values => [...new Set(values)];
+function notify(message) {
+  $('toast').textContent = message; $('toast').hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{$('toast').hidden = true},4200);
+}
+async function save(next,membership,imported=false) {
+  if (saving) { notify('请等待当前修改保存。'); return false; }
+  saving=true;
+  try {
+    const result=await api('admin/rows',{rows:next,revision,membership,imported});
+    revision=result.revision;
+    rows=result.rows??next;
+    schedules=result.schedules??schedules;
+    excludedMembers=new Set((result.excluded??[]).map(pair=>JSON.stringify(pair)));
+    return true;
+  } catch(e) { notify(e.message); return false; }
+  finally { saving=false; }
+}
+function pill(text, kind='') { return '<span class="pill '+kind+'">'+text+'</span>'; }
+function exportCsv(filename, headers, entries) {
+  const quote = value => {
+    let str = String(value ?? '');
+    if (typeof value === 'string' && /^[\s]*[=+\-@]/.test(str)) str = "'"+str;
+    return '"'+str.replaceAll('"','""')+'"';
+  };
+  download(filename,'\ufeff'+[headers,...entries].map(row=>row.map(quote).join(',')).join('\r\n'),'text/csv;charset=utf-8');
+}
+function download(name,content,type) {
+  const url=URL.createObjectURL(new Blob([content],{type}));
+  const link=document.createElement('a'); link.href=url; link.download=name;
+  link.click(); setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+function newestInkNames() {
+  return unique(rows.map(row=>row.group)).reverse();
+}
+function baseRows() {
+  const term = query.trim().toLocaleLowerCase();
+  if (view==='member' && !term) return [];
+  const matching=rows.filter(r => (!group || r.group===group) && (view==='member'
+    ? r.member.toLocaleLowerCase()===term
+    : !term || [r.group,r.member,r.item,...(view==='ship'?[recipientOf(r)]:[])].some(value=>value.toLocaleLowerCase().includes(term))));
+  if(view!=='desk'&&view!=='ship'&&view!=='bill') return matching;
+  const inkOrder=new Map(newestInkNames().map((ink,index)=>[ink,index]));
+  return matching.sort((a,b)=>inkOrder.get(a.group)-inkOrder.get(b.group));
+}
+function visibleRows() {
+  const base=baseRows().filter(r=>!(r.cancelled&&(view==='ship'||status)));
+  if (status==='bottle' && view==='ship') return base.filter(r=>r.paid&&r.arrived&&wantsBottle(r));
+  if (status) return base.filter(statuses[status][1]);
+  return view==='ship' ? base.filter(r=>r.paid && r.arrived) : base;
+}
+function bills(list) {
+  const totals=new Map();
+  for (const r of list) {
+    const identity=JSON.stringify([r.group,r.member]);
+    const bill=totals.get(identity) ?? {group:r.group,member:r.member,qty:0,ml:0,fee:0,separate:0,total:0,paid:0,records:[]};
+    bill.qty+=r.qty; bill.ml+=volume([r]); bill.fee+=chargedFee(r); bill.separate+=containerAmount(r,true); bill.records.push(r); bill.total+=amount(r);
+    if (r.paid) bill.paid+=amount(r);
+    totals.set(identity,bill);
+  }
+  return [...totals.values()];
+}
+function postageTag(records){
+  const paid=records.filter(r=>r.postagePaid===true).length;
+  return pill(paid===records.length?'已付邮费':paid?'部分已付邮费':'邮费待确认',paid===records.length?'good':'wait');
+}
+function shippedTimes(records){
+  if(view!=='ship') return '';
+  const dates=unique(records.filter(r=>r.ship===2&&r.sentAt).map(r=>r.sentAt)).sort();
+  return dates.map(date=>'<small>发货 '+esc(new Date(date).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}))+'</small>').join('');
+}
+function groupedOrderRow(bill,readOnly){
+  const list=bill.records;
+  const key=bottleKey(list[0]);
+  const summarize=(labels,mixed)=>new Set(labels).size===1?labels[0]:mixed;
+  const paid=summarize(list.map(r=>r.paid?'已交肾':'未交肾'),'部分已交肾');
+  const arrived=summarize(list.map(r=>r.arrived?'已到货':'未到货'),'部分已到货');
+  const shipped=summarize(list.map(r=>r.ship===2?'已寄出':r.ship===1?'已排发':r.paid&&r.arrived?'可排发':'未排发'),'进度不同');
+  const recipients=unique(list.map(recipientOf));
+  const specs=list.map(r=>esc(r.item)+' × '+r.qty).join(' + ');
+  const checkbox='<td><input type="checkbox" data-select-group="'+esc(key)+'" aria-label="选中 '+esc(bill.member)+' 的全部可见明细" '+(list.every(r=>selected.has(r.id))?'checked':'')+'></td>';
+  return '<tr class="grouped-order">'+(readOnly?'':checkbox)+'<td><strong>'+esc(bill.member)+'</strong>'+
+    (list.some(wantsBottle)?pill('要瓶','bottle'):'')+(list.some(transferred)?pill('转单','ship'):'')+'<small>'+esc(bill.group)+'</small>'+
+    (recipients.some(name=>name!==bill.member)?'<small>排发给 '+esc(recipients.join('、'))+'</small>':'')+'</td><td><strong>'+
+    (bill.ml?volume(list)+' ml':list.length+' 条明细')+'</strong>'+(!bill.ml?'<small>'+specs+'</small>':'')+
+    (bill.fee?'<small>计入应收的耗材 '+money(bill.fee)+'</small>':'')+
+    (bill.separate?'<small>田宫瓶另单 '+money(bill.separate)+'</small>':'')+'</td><td class="money">'+money(bill.total)+
+    '</td><td>'+pill(paid,paid==='已交肾'?'good':'wait')+'</td><td>'+pill(arrived,arrived==='已到货'?'good':'arrival')+
+    '</td><td>'+pill(shipped)+shippedTimes(list)+(view==='ship'?'<small>'+postageTag(list)+'</small>':'')+'</td>'+(readOnly?'':'<td><button class="link" data-expand-order="'+esc(key)+'" aria-expanded="'+expandedOrders.has(key)+'">'+
+    (expandedOrders.has(key)?'收起':'展开')+'</button></td>')+'</tr>';
+}
+function sortByAmount(list, getAmount) {
+  return amountSort?[...list].sort((a,b)=>amountSort*(getAmount(a)-getAmount(b))):list;
+}
+function amountHeader(label, readOnly=false) {
+  if(readOnly) return '<th scope="col">'+label+'</th>';
+  const direction=amountSort===1?'ascending':amountSort===-1?'descending':'none';
+  const next=amountSort===-1?'从低到高':'从高到低';
+  return '<th scope="col" aria-sort="'+direction+'"><button class="link amount-sort" data-amount-sort aria-label="按'+label+next+'排序">'+
+    label+' <span aria-hidden="true">'+(amountSort===1?'↑':amountSort===-1?'↓':'↕')+'</span></button></th>';
+}
+function orderTable(list, readOnly=view==='member', grouped=true) {
+  if (!list.length) return '<div class="empty">'+(view==='member'&&!query.trim()?'输入团员名后查看记录':'没有符合条件的记录')+'</div>';
+  const all = list.every(r=>selected.has(r.id));
+  const detailRow=r=>'<tr>'+(!readOnly?'<td><input type="checkbox" data-select="'+esc(r.id)+'" aria-label="选中 '+esc(r.member+' '+r.item)+'" '+(selected.has(r.id)?'checked':'')+'></td>':'')+'<td><strong>'+esc(r.member)+'</strong>'+(wantsBottle(r)?pill('要瓶','bottle'):'')+(transferred(r)?pill('转单','ship'):'')+'<small>'+esc(r.group)+(recipientOf(r)!==r.member?' · 排发给 '+esc(recipientOf(r)):'')+'</small></td><td>'+(volume([r])?'<strong>'+volume([r])+' ml</strong><small>'+esc(r.item)+' × '+r.qty+'</small>':r.bottleOnly?'单要瓶 × '+r.bottleCount:esc(r.item)+' <small>× '+r.qty+'</small>')+containerUsage(r,false)+(chargedFee(r)?'<small>计入应收的耗材 '+money(chargedFee(r))+'</small>':'')+containerUsage(r,true)+'</td><td class="money">'+money(amount(r))+(r.manualAmount!=null?'<small>手动应收</small>':'')+'</td><td>'+pill(r.paid?'已交肾':'未交肾',r.paid?'good':'wait')+'</td><td>'+pill(r.arrived?'已到货':'未到货',r.arrived?'good':'arrival')+(r.handoff?'<small>'+esc(r.handoff)+'</small>':'')+'</td><td>'+pill(r.ship===2?'已寄出':r.ship===1?'已排发':r.paid&&r.arrived?'可排发':'未排发',r.ship?'ship':'')+(view==='ship'?'<small>'+postageTag([r])+'</small>':'')+shippedTimes([r])+(r.tracking?'<small>'+esc(r.tracking)+'</small>':'')+'</td>'+(!readOnly?'<td><button class="link" data-edit="'+esc(r.id)+'">更新</button></td>':'')+'</tr>';
+  const body=grouped?sortByAmount(bills(list),b=>b.total).map(b=>{
+    if(b.records.length===1) return detailRow(b.records[0]);
+    return groupedOrderRow(b,readOnly)+(expandedOrders.has(bottleKey(b.records[0]))&&!readOnly?b.records.map(detailRow).join(''):'');
+  }).join(''):sortByAmount(list,amount).map(detailRow).join('');
+  return '<div class="scroll"><table><thead><tr>'+(!readOnly?'<th><input type="checkbox" data-all aria-label="全选当前明细" '+(all?'checked':'')+'></th>':'')+'<th>团员 / 墨水</th><th>认领明细</th>'+amountHeader('金额',readOnly)+'<th>交肾</th><th>到货</th><th>排发</th>'+(!readOnly?'<th>操作</th>':'')+'</tr></thead><tbody>'+body+'</tbody></table></div>';
+}
+const openedRecipients=new Set();
+function inkTitle(ink){
+  const pricing=rows.find(r=>r.group===ink&&r.bottlePricing)?.bottlePricing;
+  if(!pricing) return ink;
+  const current=(pricing.cents/100)+' 元 / '+pricing.capacity+' ml';
+  const base=ink.replace(/\s+\d+(?:\.\d+)?\s*\/\s*\d+(?:\.\d+)?(?:\s*ml)?$/i,'');
+  return base+' · '+current;
+}
+function ordersByInk(list) {
+  if(!list.length) return '<div class="empty">没有符合条件的明细</div>';
+  const inks=new Map();
+  for(const row of list){
+    if(!inks.has(row.group)) inks.set(row.group,[]);
+    inks.get(row.group).push(row);
+  }
+  return [...inks].map(([ink,records])=>{
+    const people=unique(records.map(recipientOf)).length;
+    const volumeMl=volume(records);
+    return '<section class="ink-timeline order-ink"><div class="time-card-head"><div><h3>'+
+      '<span data-ink-title="'+esc(ink)+'" title="双击打开墨水明细">'+esc(inkTitle(ink))+'</span>'+(records[0].cancelled?pill('已散团','wait'):'')+'</h3><p class="order-ink-count">'+
+      people+' 位团员 · '+records.length+' 条明细'+(volumeMl?' · '+volumeMl+' ml':'')+'</p></div>'+
+      '<button class="btn" data-fee-ink="'+esc(ink)+'">查看明细</button></div></section>';
+  }).join('');
+}
+function ordersByRecipient(list) {
+  if(!list.length) return '<div class="empty">没有符合条件的明细</div>';
+  const recipients=new Map();
+  for(const row of list){
+    const name=recipientOf(row);
+    if(!recipients.has(name)) recipients.set(name,[]);
+    recipients.get(name).push(row);
+  }
+  return [...recipients].sort(([a],[b])=>a.localeCompare(b,'zh-CN')).map(([name,records])=>{
+    const open=openedRecipients.has(name);
+    const ml=volume(records);
+    return '<section class="ink-timeline order-ink"><h3><button class="link order-ink-toggle" data-order-recipient="'+esc(name)+
+      '" aria-expanded="'+open+'"><span aria-hidden="true">'+(open?'▾':'▸')+'</span> '+esc(name)+'</button></h3>'+
+      '<p class="order-ink-count">'+unique(records.map(r=>r.group)).length+' 款墨水 · '+records.length+
+      ' 条明细'+(ml?' · '+ml+' ml':'')+'</p>'+
+      (open?orderTable(records,false).replace('data-all aria-label','data-all-recipient="'+esc(name)+'" aria-label'):'')+'</section>';
+  }).join('');
+}
+function billTable(list) {
+  if (!list.length) return '<div class="empty">没有符合条件的记录</div>';
+  return '<div class="scroll"><table><thead><tr><th>团员</th><th>墨水</th><th>份数 / ml</th><th>本单耗材</th><th>田宫瓶另单</th>'+amountHeader('本单应收')+'<th>已收</th><th>待收</th><th>明细</th></tr></thead><tbody>'+sortByAmount(bills(list),b=>b.total).map(b=>'<tr><td><strong>'+esc(b.member)+'</strong>'+(b.records.some(wantsBottle)?pill('要瓶','bottle'):'')+(b.records.some(transferred)?pill('转单','ship'):'')+'</td><td>'+esc(b.group)+'</td><td>'+(b.records.every(r=>r.bottleOnly)?'单要瓶':b.qty+(b.ml?' / '+Number(b.ml.toFixed(3))+' ml':''))+'</td><td>'+costsCell(b.fee,b.fee?'计入应收的耗材':'')+'</td><td>'+costsCell(b.separate,containerDetails(b.records,true))+'</td><td>'+money(b.total)+(b.records.some(r=>r.manualAmount!=null)?'<small>含手动应收</small>':'')+'</td><td>'+money(b.paid)+'</td><td>'+money(b.total-b.paid)+'</td><td><button class="link" data-member="'+esc(b.member)+'" data-group="'+esc(b.group)+'">查看</button></td></tr>').join('')+'</tbody></table></div>';
+}
+const timelineFields=[['opened','成团'],['deadline','交肾截止'],['ready','可排发']];
+function timelineHtml(dates={}, records=[]){
+  const stages=timelineFields.map(([key,label])=>[label,dates[key]?esc(dates[key].replace('T',' ')):'待公布']);
+  const arrivalTimes=[...new Set(records.filter(r=>r.arrived&&r.arrivedAt).map(r=>r.arrivedAt))].sort();
+  if(arrivalTimes.length){
+    const times=arrivalTimes.map(date=>esc(new Date(date).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false})));
+    if(records.some(r=>r.arrived&&!r.arrivedAt)) times.push('部分归仓时间未登记');
+    if(records.some(r=>!r.arrived)) times.push('部分明细待归仓');
+    stages[2]=['可排发 · 已归仓',times.join('<br>')];
+  }else if(records.some(r=>r.arrived)){
+    stages[2]=['可排发 · 已归仓','实际时间未登记'+(records.some(r=>!r.arrived)?' · 部分明细待归仓':'')+(dates.ready?'<br>原计划 '+esc(dates.ready.replace('T',' ')):'')];
+  }
+  return '<ol class="timeline">'+stages.map(([label,date])=>'<li><strong>'+label+'</strong><small>'+date+'</small></li>').join('')+'</ol>';
+}
+const timeOptions=timelineFields;
+function renderTimelines(){
+  const byTime=view==='time';
+  if(!byTime&&view!=='ink'){
+    $('timelines').hidden=true;
+    $('timelines').innerHTML='';
+    return;
+  }
+  const groups=new Map();
+  for(const row of rows){
+    if(row.demo||(!byTime&&row.group!==group)) continue;
+    if(!groups.has(row.group)) groups.set(row.group,[]);
+    groups.get(row.group).push(row);
+  }
+  const entries=[...groups];
+  const timeValue=([ink,records])=>{
+    if(timeSort==='ready'){
+      const times=records.map(r=>r.arrived?r.arrivedAt:null)
+        .filter(Boolean).map(date=>Date.parse(date)).filter(Number.isFinite);
+      if(times.length) return Math.min(...times);
+    }
+    const planned=schedules[ink]?.[timeSort];
+    return planned?Date.parse(planned+'+08:00'):null;
+  };
+  if(byTime){
+    const dated=entries.map(entry=>({entry,time:timeValue(entry)}));
+    dated.sort((a,b)=>a.time==null?(b.time==null?0:1):b.time==null?-1:timeDirection*(a.time-b.time));
+    entries.splice(0,entries.length,...dated.map(item=>item.entry));
+  }
+  const controls=byTime?'<div class="panel-head"><h2>墨水时间线</h2><div class="actions"><label>排序依据 <select id="time-sort">'+
+    timeOptions.map(([value,label])=>'<option value="'+value+'" '+(timeSort===value?'selected':'')+'>'+label+'</option>').join('')+
+    '</select></label><button class="btn" id="time-direction">'+(timeDirection===1?'最早在前 ↑':'最晚在前 ↓')+'</button></div></div>':'';
+  $('timelines').hidden=!byTime&&!entries.length;
+  $('timelines').innerHTML=controls+(entries.map(([ink,records])=>'<div class="ink-timeline"><div class="time-card-head"><h3>'+(byTime?'<button class="link time-ink-link" data-fee-ink="'+esc(ink)+'">'+esc(ink)+'</button>':esc(ink))+' · 北京时间</h3>'+
+    (byTime?'<button class="btn" data-edit-timeline="'+esc(ink)+'">编辑时间 / 备注</button>':'')+'</div>'+
+    (schedules[ink]?.note?'<p class="ink-note">备注 · '+esc(schedules[ink].note)+'</p>':'')+timelineHtml(schedules[ink],records)+'</div>').join('')
+    ||(byTime?'<div class="empty">导入排表后，这里会显示各款墨水的时间线。</div>':''));
+}
+function render() {
+  chargedFees=calculateFees(rows);
+  renderTimelines();
+  const focus = document.activeElement?.id;
+  document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',(b.dataset.view===view||view==='ink'&&b.dataset.view==='desk')?'page':'false'));
+  $('location').textContent = branding.name+' / '+views[view][0];
+  $('eyebrow').textContent = '团务工作台';
+  $('title').textContent = view==='ink'?inkTitle(group):views[view][0];
+  $('subtitle').textContent = views[view][1];
+  for(const id of ['stats','panel']) $(id).hidden=view==='time';
+  if(view==='time'){
+    $('fee-alert').hidden=true;
+    $('notice').textContent='';
+    if(focus&&$(focus)) $(focus).focus();
+    return;
+  }
+  const list = visibleRows(), base=baseRows();
+  const cards = view==='ship' ? ['ready','queued','sent','unarrived'] : ['unpaid','paid','unarrived','queued'];
+  $('stats').innerHTML = cards.map(k=>'<button class="stat" data-status="'+k+'" aria-pressed="'+(status===k)+'"><span><i class="dot '+statuses[k][2]+'"></i>'+statuses[k][0]+'</span><b>'+base.filter(r=>!r.cancelled&&statuses[k][1](r)).length+'</b><span>条明细</span></button>').join('');
+  const heading = view==='bill'?'团员肾表':view==='ship'?'排发明细':view==='member'?'团员明细':'认领明细';
+  const canShare = view==='member' && base.length && !base.some(r=>r.demo) && unique(base.map(r=>r.member)).length===1;
+  const cancelledInk=view==='ink'&&rows.some(r=>r.group===group&&r.cancelled);
+  $('panel-head').innerHTML = '<div class="panel-head"><div><h2>'+heading+'</h2><p>'+list.length+' 条明细 · '+money(sum(list))+'</p></div><div class="actions">'+(view==='member'?(canShare?'<button class="btn" data-action="snapshot">下载团员快照</button>':''):'<button class="btn" data-action="export">导出'+(view==='bill'?'肾表':view==='ship'?'排发清单':'明细')+'</button>')+(view==='ink'?'<button class="btn danger" data-action="cancel-ink">'+(cancelledInk?'恢复墨水':'标记散团')+'</button>':'')+(view==='ink'&&!cancelledInk?'<button class="btn" data-action="ink-arrive">一键归仓</button><button class="btn" data-action="reprice">整瓶改价</button>':'')+(view==='bill'||view==='ink'?'<button class="btn primary" data-action="bill-image">'+(view==='ink'?'导出肾表 JPG':'导出 JPG')+'</button>':'')+'</div></div>';
+  const search=$('query');
+  if(!searchComposing&&search.value!==query) search.value=query;
+  search.placeholder=view==='member'?'输入完整团员名':'搜索团员或墨水';
+  $('query-clear').disabled=!query&&!search.value;
+  $('group').hidden=view==='ink';
+  $('group').innerHTML='<option value="">全部墨水</option>'+newestInkNames().map(g=>'<option '+(g===group?'selected ':'')+'value="'+esc(g)+'">'+esc(g)+'</option>').join('');
+  $('status').innerHTML='<option value="">'+(view==='ship'?'所有排发明细':'全部状态')+'</option>'+Object.entries(statuses).map(([k,[label]])=>'<option '+(status===k?'selected ':'')+'value="'+k+'">'+label+'</option>').join('');
+  $('panel-results').innerHTML =
+    (selected.size&&view!=='bill'&&view!=='member'?'<div class="batch">已选 '+selected.size+' 条 <button class="btn" data-batch="paid">确认交肾</button><button class="btn" data-batch="arrived">登记归仓</button><button class="btn" data-batch="queued">加入排发</button>'+(view==='ship'?'<button class="btn" data-batch="postagePaid">标记已付邮费</button>':'')+'<button class="btn" data-batch="sent">登记同包裹寄出</button><button class="btn" data-batch="merge">合并显示所选</button><button class="btn danger" data-batch="delete">删除所选明细</button></div>':'')+
+    (view==='bill'?billTable(list):view==='ship'?ordersByRecipient(list):view==='desk'?ordersByInk(list):orderTable(list))+'<div class="footer">'+(view==='bill'?bills(list).length+' 条团员汇总':unique(list.map(view==='ship'?recipientOf:r=>r.member)).length+' 位团员')+'</div>';
+  const payerGroups=new Set(rows.filter(r=>r.wantsBottle).map(r=>r.group));
+  const unallocated=new Map();
+  if (view==='bill') {
+    for (const row of rows) {
+      const fee=effectiveCosts.get(row.id);
+      if (fee>0&&!payerGroups.has(row.group)) unallocated.set(row.group,(unallocated.get(row.group)??0)+fee);
+    }
+  }
+  $('fee-alert').hidden=!unallocated.size;
+  $('fee-alert').innerHTML=unallocated.size
+    ? '<h2>⚠ 未指定耗材承担人 · '+unallocated.size+' 种墨水</h2><p>以下墨水还没有标记要瓶团员。冷冻管和玻璃瓶费已按实际用量计入各团员应收。</p><ul>'+
+      [...unallocated].map(([ink,fee])=>'<li><button class="link" data-fee-ink="'+esc(ink)+'">'+esc(ink)+'</button><span class="money">'+money(fee)+'</span></li>').join('')+'</ul>'
+    : '';
+  $('notice').textContent = storageError?'当前存档读取失败。':!rows.length?'请点击「导入排表」添加真实记录。':'记录保存在运行工作台的设备。团员入口可以查看更新后的进度。';
+  if (focus && $(focus)) {
+    $(focus).focus();
+  }
+}
+function cents(value, label) {
+  const match = String(value).trim().match(/^(?:[¥￥]\s*)?(\d+)(?:\.(\d{1,2}))?$/);
+  if (!match) throw Error(label+'须填写最多两位小数的非负金额');
+  const result = Number(match[1])*100 + Number((match[2]??'').padEnd(2,'0'));
+  if (!Number.isSafeInteger(result)) throw Error(label+'超出可处理范围');
+  return result;
+}
+function parseText(text) {
+  const source=text.replace(/^\uFEFF/,'');
+  const lines=source.split(/\r\n?|\n/);
+  const header=lines.find(line=>/^\s*种类(?=\t|,)/.test(line))??lines.find(line=>line.trim())??'';
+  const separator=header.includes('\t')?'\t':',';
+  const grid=[]; let row=[], cell='', quoted=false;
+  for (let i=0;i<source.length;i++) {
+    const c=source[i];
+    if (c==='"') {
+      if (quoted&&source[i+1]==='"') { cell+='"'; i++; }
+      else if (quoted || !cell) quoted=!quoted;
+      else cell+=c;
+    } else if (!quoted&&(c===separator||c==='\n'||c==='\r')) {
+      row.push(cell.trim()); cell='';
+      if (c!==separator) {
+        if (c==='\r'&&source[i+1]==='\n') i++;
+        grid.push(row); row=[];
+      }
+    } else cell+=c;
+  }
+  if (quoted) throw Error('排表有未闭合的引号');
+  if (cell||row.length) grid.push([...row,cell.trim()]);
+  return grid;
+}
+async function readXlsx(file) {
+  if (file.size>12_000_000) throw Error('Excel 文件须小于 12 MB');
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  const view=new DataView(bytes.buffer);
+  let end=bytes.length-22;
+  while (end>=Math.max(0,bytes.length-65557)&&view.getUint32(end,true)!==0x06054b50) end--;
+  if (end<Math.max(0,bytes.length-65557)) throw Error('无法读取 Excel，请确认文件是 .xlsx');
+  const files=new Map();
+  let pos=view.getUint32(end+16,true);
+  const count=view.getUint16(end+10,true);
+  for (let i=0;i<count;i++) {
+    if (view.getUint32(pos,true)!==0x02014b50) throw Error('Excel 压缩目录损坏');
+    const nameLength=view.getUint16(pos+28,true);
+    const name=new TextDecoder().decode(bytes.subarray(pos+46,pos+46+nameLength));
+    files.set(name,{method:view.getUint16(pos+10,true),size:view.getUint32(pos+20,true),uncompressed:view.getUint32(pos+24,true),start:view.getUint32(pos+42,true)});
+    pos+=46+nameLength+view.getUint16(pos+30,true)+view.getUint16(pos+32,true);
+  }
+  async function xml(path) {
+    const f=files.get(path);
+    if (!f) throw Error('Excel 缺少工作表内容');
+    if (f.uncompressed>16_000_000||![0,8].includes(f.method)) throw Error('Excel 工作表过大或使用了不支持的压缩方式');
+    const start=f.start+30+view.getUint16(f.start+26,true)+view.getUint16(f.start+28,true);
+    const raw=bytes.subarray(start,start+f.size);
+    const data=f.method===0 ? raw : await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();
+    const doc=new DOMParser().parseFromString(new TextDecoder().decode(data),'application/xml');
+    if (doc.querySelector('parsererror')) throw Error('Excel 内容无法读取');
+    return doc;
+  }
+  const book=await xml('xl/workbook.xml');
+  const rels=await xml('xl/_rels/workbook.xml.rels');
+  const shared=files.has('xl/sharedStrings.xml') ? [...(await xml('xl/sharedStrings.xml')).getElementsByTagNameNS('*','si')].map(textParts) : [];
+  function textParts(node) { return [...node.getElementsByTagNameNS('*','t')].map(t=>t.textContent).join(''); }
+  const targets=new Map([...rels.getElementsByTagNameNS('*','Relationship')].map(r=>[r.getAttribute('Id'),r.getAttribute('Target')]));
+  const result=[];
+  for (const sheet of book.getElementsByTagNameNS('*','sheet')) {
+    if (sheet.getAttribute('state')==='hidden'||sheet.getAttribute('state')==='veryHidden') continue;
+    const target=targets.get(sheet.getAttribute('r:id'));
+    if (!target) continue;
+    const path=target.startsWith('/')?target.slice(1):'xl/'+target;
+    const doc=await xml(path);
+    const grid=[...doc.getElementsByTagNameNS('*','row')].map(row=>{
+      const cells=[];
+      for (const c of row.getElementsByTagNameNS('*','c')) {
+        const column=(c.getAttribute('r')??'').match(/^[A-Z]+/)?.[0];
+        if (!column) continue;
+        const index=[...column].reduce((n,ch)=>n*26+ch.charCodeAt(0)-64,0)-1;
+        const v=c.getElementsByTagNameNS('*','v')[0]?.textContent??'';
+        const type=c.getAttribute('t');
+        cells[index]=String(type==='s'?shared[Number(v)]??'':type==='inlineStr'?textParts(c):v).trim();
+      }
+      return cells;
+    });
+    if (grid.some(row=>row.some(Boolean))) result.push(grid);
+  }
+  if (!result.length) throw Error('Excel 中没有可读取的数据');
+  return result;
+}
+function isBottleOption(item) {
+  return ['瓶子','要瓶','要瓶子'].includes(item);
+}
+function parseGrid(grid, override='') {
+  const start=grid.findIndex(row=>row[0]==='种类' && row.some(Boolean));
+  const pending=[];
+  const make=(group,member,item,qty,price,ml=0)=>({group,member,item,qty,price,ml,fee:0,paid:false,arrived:false,ship:0,tracking:''});
+  if (start>=0) {
+    const name=override || grid.slice(0,start).flat().find(v=>v?.includes('排表'))?.split('排表')[0]?.trim().replace(/^【|】$/g,'');
+    if (!name) throw Error('请填写墨水名称');
+    const specs=grid[start]; const prices=grid[start+1]??[];
+    if (!/单价/.test(prices[0]??'')) throw Error('种类下一行须填写序号/单价');
+    const columns=[];
+    const bottleColumns=[];
+    const bottleMembers=new Map();
+    specs.forEach((item,i)=>{
+      if (!i||!item) return;
+      if (isBottleOption(item)) {
+        bottleColumns.push(i);
+        return;
+      }
+      const match=item.match(/^(\d+(?:\.\d+)?)\s*(?:ml\b|毫升)/i);
+      columns.push({i,item,price:cents(prices[i]??'',item+'单价'),ml:match?Number(match[1]):0});
+    });
+    if (!columns.length&&!bottleColumns.length) throw Error('排表没有规格列');
+    for (let j=start+2;j<grid.length;j++) {
+      const line=grid[j];
+      if (!line.some(Boolean)) continue;
+      if (!/^\d+$/.test(line[0]??'')) throw Error('排表第 '+(j+1)+' 行缺少数字序号');
+      for (const i of bottleColumns) if (line[i]) bottleMembers.set(line[i],(bottleMembers.get(line[i])??0)+1);
+      for (const {i,item,price,ml} of columns) {
+        if (line[i]) pending.push(make(name,line[i],item,1,price,ml));
+      }
+    }
+    for (const [member,count] of bottleMembers) {
+      const claims=pending.filter(row=>row.member===member);
+      if (claims.length) {
+        for (const row of claims) row.wantsBottle=true;
+        claims[0].bottleCount=count;
+      } else {
+        pending.push({...make(name,member,'单要瓶',1,0),wantsBottle:true,bottleOnly:true,bottleCount:count});
+      }
+    }
+  } else {
+    const headings=grid[0]??[];
+    const aliases=[['墨水','团期','团名'],['团员','昵称','QQ昵称'],['谷子','规格','商品','认领明细'],['数量','份数'],['单价','价格']];
+    const indices=aliases.map(names=>headings.findIndex(h=>names.includes(h)));
+    if (indices.some((index,i)=>index<0&&(i!==0||!override))) throw Error('请使用拼谷助手排表，或带「墨水、团员、规格、数量、单价」表头的明细表。');
+    for (let j=1;j<grid.length;j++) {
+      const line=grid[j];
+      if (!line.some(Boolean)) continue;
+      const [g,member,item,count,price]=indices.map(i=>line[i]??'');
+      const group=override||g, qty=Number(count), ml=Number(item.match(/^(\d+(?:\.\d+)?)\s*(?:ml|毫升)$/i)?.[1]??0);
+      if (!group||!member||!item||!/^\d+$/.test(count)||!Number.isSafeInteger(qty)||qty<1) throw Error('第 '+(j+1)+' 行的墨水、团员、规格或数量有误');
+      pending.push(make(group,member,item,qty,cents(price,'第 '+(j+1)+' 行单价'),ml));
+    }
+  }
+  if (!pending.length) throw Error('没有找到认领记录');
+  return pending;
+}
+function combine(list) {
+  const merged=new Map();
+  for (const r of list) {
+    const id=JSON.stringify([r.group,r.member,r.item,r.price]);
+    const current=merged.get(id);
+    if (current) current.qty+=r.qty;
+    else merged.set(id,{...r,id});
+  }
+  return [...merged.values()];
+}
+function calculateFees(records) {
+  const defaults=new Map();
+  effectiveCosts=new Map();
+  for(const row of records) {
+    const cost=containerAmount(row);
+    effectiveCosts.set(row.id,cost);
+    const key=JSON.stringify([row.group,row.member,row.billingHolder??recipientOf(row)]);
+    const automatic=row.defaultTube&&cost===30||row.defaultGlass&&cost===70||row.defaultGlass&&row.defaultTube&&cost===100;
+    if(!automatic) continue;
+    const previous=defaults.get(key);
+    if(!previous) defaults.set(key,row);
+    else if(cost>effectiveCosts.get(previous.id)){
+      effectiveCosts.set(previous.id,0);
+      defaults.set(key,row);
+    }else effectiveCosts.set(row.id,0);
+  }
+  const pools=new Map(), payers=new Map(), fees=new Map();
+  for(const row of records) {
+    const fee=effectiveCosts.get(row.id);
+    fees.set(row.id,fee);
+    pools.set(row.group,(pools.get(row.group)??0)+fee);
+    if(!row.wantsBottle) continue;
+    if(!payers.has(row.group)) payers.set(row.group,new Map());
+    const members=payers.get(row.group);
+    if(!members.has(row.member)) members.set(row.member,row.id);
+  }
+  for(const row of records) if(payers.has(row.group)) fees.delete(row.id);
+  for(const [group,members] of payers) {
+    const total=pools.get(group);
+    const share=Math.floor(total/members.size);
+    const remainder=total%members.size;
+    let index=0;
+    for(const id of members.values()) fees.set(id,share+(index++<remainder?1:0));
+  }
+  return fees;
+}
+const chargedFee=r=>chargedFees.get(r.id)??0;
+function amount(r) { return r.manualAmount??(r.qty*r.price+chargedFee(r)); }
+function volume(list) { return Math.round(list.reduce((n,r)=>n+(r.volumeMl??((r.ml??0)*r.qty)),0)*1000)/1000; }
+function present(list, title) {
+  const table=orderTable(list,true);
+  download(title+'-团员快照.html','<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(branding.name)+' · '+esc(title)+'</title><style>body{max-width:1000px;margin:28px auto;padding:0 14px;color:#203c32;background:#f3f4ee;font:15px system-ui,sans-serif}h1{font-size:26px}p{line-height:1.6}.scroll{overflow:auto}table{border-collapse:collapse;background:white;white-space:nowrap}th,td{padding:10px;border:1px solid #dbe4d8;text-align:left}td small{display:block;color:#47594f}.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));list-style:none;padding:0;gap:10px;margin:12px 0}.timeline li{padding:8px;border-top:3px solid #8ba98d;background:#f3f6ee;border-radius:3px 3px 8px 8px;font-size:13px}.timeline time,.timeline small{display:block;margin-top:5px}.ink-timeline{padding:12px 16px}.ink-timeline h3{margin:0;font-size:15px}</style><h1>'+esc(branding.name)+' · '+esc(title)+'</h1><p>生成时间 '+esc(new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'}))+' · 应收 '+money(sum(list))+'</p>'+table+'</html>','text/html;charset=utf-8');
+}
+function addDefaultContainers(newRows, existingRows, bottleTags) {
+  const volumes=new Map();
+  for(const row of newRows) {
+    const key=bottleKey(row);
+    volumes.set(key,(volumes.get(key)??0)+(row.ml??0)*row.qty);
+  }
+  const accounted = new Set(existingRows.map(bottleKey));
+  for (const row of newRows) {
+    const key = bottleKey(row);
+    if (!accounted.has(key) && !bottleTags.has(key)) {
+      const total=volumes.get(key);
+      if(total===10||total===15) {
+        row.containers=total===15?{glass:1,tube:1}:{glass:1};
+        row.defaultGlass=true;
+        row.defaultTube=total===15;
+      } else {
+        row.containers={tube:1};
+        row.defaultTube=true;
+      }
+    }
+    accounted.add(key);
+  }
+}
+function bottleKey(row) { return JSON.stringify([row.group,row.member]); }
+let imported=null;
+let importedTags=new Set();
+let importRevision=0;
+function resetImport() {
+  importRevision++;
+  imported=null;
+  importedTags=new Set();
+  $('commit-import').disabled=true;
+  $('import-summary').textContent='';
+  $('import-error').textContent='';
+}
+function getOptions() {
+  const groupName=$('import-name').value.trim();
+  return {groupName, files:[...$('import-file').files], text:$('import-text').value};
+}
+$('import-open').onclick=()=>{
+  $('import-file').value=''; $('import-text').value=''; $('import-name').value='';
+  resetImport(); $('import-dialog').showModal();
+};
+for (const id of ['import-file','import-text','import-name']) $(id).addEventListener('input',resetImport);
+$('preview-import').onclick=async()=>{
+  resetImport();
+  const revision=importRevision;
+  try {
+    const {groupName,files,text}=getOptions();
+    if (files.length>1&&groupName) throw Error('批量导入时请将墨水名称留空，以便使用各表的名称。');
+    const pending=[];
+    for (const file of files.length?files:[null]) {
+      try {
+        const grids=file?.name.toLowerCase().endsWith('.xlsx')
+          ? await readXlsx(file) : [parseText(file?await file.text():text)];
+        pending.push(combine(grids.flatMap(grid=>parseGrid(grid,groupName))));
+      } catch(error) {
+        throw Error((file?file.name+'：':'')+error.message);
+      }
+    }
+    if (revision!==importRevision) return;
+    const batchIds=new Set();
+    const result=[];
+    let excludedCount=0;
+    for (const entries of pending) {
+      for (const row of entries) {
+        if (excludedMembers.has(bottleKey(row))) { excludedCount++; continue; }
+        if (batchIds.has(row.id)) throw Error('所选文件含重复明细：'+row.group+'。请检查是否选择了同一团的多份排表。');
+        batchIds.add(row.id);
+        result.push(row);
+      }
+    }
+    if (!result.every(validRow)) throw Error('排表有超出范围的数量或金额');
+    const existing=new Set(rows.filter(r=>!r.demo).map(r=>r.id));
+    imported=result.filter(r=>!existing.has(r.id));
+    const skipped=result.length-imported.length;
+    importedTags=new Set(result.filter(r=>r.wantsBottle).map(bottleKey));
+    addDefaultContainers(imported,rows.filter(r=>!r.demo&&!isBottleOption(r.item)),importedTags);
+    const tubeCount=imported.filter(r=>r.containers?.tube===1).length;
+    const glassCount=imported.filter(r=>r.defaultGlass).length;
+    const baseTotal=imported.reduce((total,r)=>total+r.qty*r.price,0);
+    const tagUpdates=rows.filter(r=>!r.demo&&!isBottleOption(r.item)&&!r.wantsBottle&&importedTags.has(bottleKey(r))).length;
+    const legacyBottle=rows.some(r=>!r.demo&&isBottleOption(r.item)&&importedTags.has(bottleKey(r)));
+    if (legacyBottle) {
+      $('import-error').textContent='已有旧版导入的瓶子订单。此次导入只补标签，旧订单和金额需另行核对。';
+    }
+    $('import-summary').textContent=(files.length?files.length+' 份文件 · ':'')+imported.length+' 条新增明细 · '+unique(imported.map(r=>r.member)).length+' 位团员 · '+volume(imported)+' ml · 基础应收 '+money(baseTotal)+(tubeCount?' · 默认冷冻管 '+tubeCount+' 支 '+money(tubeCount*containers[0].price):'')+(skipped?' · '+skipped+' 条已有同墨水、团员、规格和单价的记录保留原样':'');
+    const bottleOnlyCount=imported.filter(r=>r.bottleOnly).length;
+    if(bottleOnlyCount) $('import-summary').textContent+=' · 单要瓶 '+bottleOnlyCount+' 位';
+    if(glassCount) $('import-summary').textContent+=' · 默认玻璃瓶 '+glassCount+' 个 '+money(glassCount*70);
+    if(excludedCount) $('import-summary').textContent+=' · 已跳过 '+excludedCount+' 条此前移除的团员明细';
+    if (importedTags.size) $('import-summary').textContent+=' · '+importedTags.size+' 组要瓶标记'+(tagUpdates?' · '+tagUpdates+' 条旧明细待补标签':'');
+    $('commit-import').disabled=!imported.length&&!tagUpdates;
+  } catch(e) { if (revision===importRevision) $('import-error').textContent=e.message; }
+};
+$('commit-import').onclick=async()=>{
+  if (!imported||$('commit-import').disabled) return;
+  const existing=rows.filter(r=>!r.demo).map(r=>!isBottleOption(r.item)&&importedTags.has(bottleKey(r))?{...r,wantsBottle:true}:r);
+  if (!await save([...existing,...imported],undefined,true)) return;
+  $('import-dialog').close(); setView('bill'); notify('肾表已更新。'); resetImport();
+};
+$('template').onclick=()=>exportCsv(branding.name+'-排表模板.csv',['墨水','团员','规格','数量','单价'],[['示例墨水','团员甲','5ml',2,3.75]]);
+$('backup').onclick=()=>{$('backup-error').textContent=''; $('restore-file').value=''; $('backup-dialog').showModal();};
+$('download-backup').onclick=()=>download(branding.name+'-备份.json',JSON.stringify(rows,null,2),'application/json');
+$('restore').onclick=async()=>{
+  try {
+    const file=$('restore-file').files[0];
+    if (!file) throw Error('请先选择备份文件');
+    const restored=JSON.parse(await file.text());
+    if (!Array.isArray(restored)||!restored.every(validRow)||unique(restored.map(r=>r.id)).length!==restored.length) throw Error('备份格式无效或有重复记录');
+    if (!confirm('恢复会替换工作台的记录。继续吗？')) return;
+    if (await save(restored.filter(r=>!r.demo))) { $('backup-dialog').close(); setView('desk'); notify('备份已恢复。'); }
+  } catch(e) { $('backup-error').textContent=e.message; }
+};
+function setView(next, search='', g='') {
+  view=next; query=search; group=g; status=''; selected.clear(); render();
+}
+$('container-fields').innerHTML=containers.map(c=>'<label>'+c.name+' · '+money(c.price)+'/个<input id="count-'+c.id+'" type="number" inputmode="numeric" min="0" max="999999" step="1"></label>').join('');
+function readContainers() {
+  const counts={};
+  for (const c of containers) {
+    const field=$('count-'+c.id);
+    const value=field.value.trim();
+    if (field.validity?.badInput || (value&&!/^\d+$/.test(value))) throw Error('容器个数须为非负整数。');
+    counts[c.id]=Number(value);
+  }
+  if (!validContainers(counts)) throw Error('容器个数超出范围。');
+  return counts;
+}
+function updateContainerTotal() {
+  const current=rows.find(r=>r.id===editId);
+  if (!current) return;
+  const keepLegacy=!current.containers&&current.fee&&!$('replace-legacy-fee').checked;
+  for (const c of containers) $('count-'+c.id).disabled=Boolean(keepLegacy);
+  try {
+    const record=keepLegacy?current:{containers:readContainers()};
+    $('container-total').textContent=(keepLegacy?'原手填耗材 ':'本单耗材 ')+money(containerAmount(record))+' · 田宫瓶另单 '+money(containerAmount(record,true));
+  } catch(e) { $('container-total').textContent=e.message; }
+}
+$('container-fields').addEventListener('input',updateContainerTotal);
+$('replace-legacy-fee').addEventListener('change',updateContainerTotal);
+function openEdit(id) {
+  const r=rows.find(row=>row.id===id);
+  if (!r) return;
+  editId=id;
+  $('edit-volume').value=volume([r])||'';
+  $('edit-info').textContent=r.group+' · '+r.member+' · '+r.item+' × '+r.qty;
+  $('edit-amount').value=r.manualAmount==null?'':(r.manualAmount/100).toFixed(2);
+  $('edit-auto-amount').textContent='当前自动应收 '+money(r.qty*r.price+chargedFee(r))+'。可直接填写实际总额，清空后恢复自动计价。';
+  $('split-edit').hidden=r.qty<2||Boolean(r.ship)||r.manualAmount!=null||r.volumeMl!=null;
+  $('edit-paid').value=String(r.paid); $('edit-arrived').value=String(r.arrived);
+  $('edit-postage').value=r.postagePaid===true?'paid':'pending';
+  $('edit-shipping').value=String(r.ship); $('edit-tracking').value=r.tracking;
+  const legacy=!r.containers&&(r.fee??0)>0;
+  $('wants-bottle').checked=rows.some(row=>bottleKey(row)===bottleKey(r)&&wantsBottle(row));
+  $('legacy-fee-label').hidden=!legacy;
+  $('replace-legacy-fee').checked=false;
+  for (const c of containers) $('count-'+c.id).value=r.containers?.[c.id]??0;
+  updateContainerTotal();
+  $('edit-location').value=r.handoff??'';
+  $('edit-error').textContent=''; $('edit-dialog').showModal();
+}
+$('save-edit').onclick=async()=>{
+  try {
+    const paid=$('edit-paid').value==='true', arrived=$('edit-arrived').value==='true', ship=Number($('edit-shipping').value);
+    const tracking=$('edit-tracking').value.trim();
+    const handoff=$('edit-location').value.trim();
+    if (ship&&(!paid||!arrived)) throw Error('确认交肾和分装归仓后，才能排发。');
+    if (tracking&&ship!==2) throw Error('请选择已寄出后再填写快递单号。');
+    const current=rows.find(r=>r.id===editId);
+    if (!current) throw Error('找不到此明细。');
+    const counts=readContainers();
+    const keepLegacy=!current.containers&&current.fee&&!$('replace-legacy-fee').checked;
+    const next={...current,paid,arrived,ship,postagePaid:$('edit-postage').value==='paid',sentAt:ship===2?(current.sentAt||new Date().toISOString()):undefined,tracking,handoff,wantsBottle:$('wants-bottle').checked,defaultTube:current.defaultTube===true&&counts.tube===1,defaultGlass:current.defaultGlass===true&&counts.glass===1,fee:keepLegacy?current.fee:0,containers:keepLegacy?undefined:counts};
+    const containerChanged=containers.some(c=>(counts[c.id]??0)!==(current.containers?.[c.id]??0));
+    if(containerChanged){next.defaultTube=false;next.defaultGlass=false;}
+    if(!containerChanged&&!current.containers&&!current.fee) delete next.containers;
+    const volumeField=$('edit-volume');
+    if(!volumeField.checkValidity()||(!volumeField.value&&volume([current]))) throw Error('请输入大于 0 的毫升数，最多三位小数。');
+    if(volumeField.value&&Number(volumeField.value)!==volume([current])) next.volumeMl=Number(volumeField.value);
+    const manual=$('edit-amount').value.trim();
+    if (manual) {
+      next.manualAmount=cents(manual,'手动应收');
+      if (next.manualAmount>999999999) throw Error('手动应收金额超出范围。');
+    } else delete next.manualAmount;
+    if (!validRow(next)) throw Error('容器数量或金额超出范围。');
+    if (current.paid&&paid&&containerAmount(next)!==containerAmount(current)) throw Error('调整已交肾记录的耗材费时，请先改回未交肾，重新核对收款。');
+    const updated=rows.map(r=>{
+      if(r.id===editId) return next;
+      if(bottleKey(r)===bottleKey(current)&&wantsBottle(r)!==next.wantsBottle) return {...r,wantsBottle:next.wantsBottle};
+      return r;
+    });
+    if (await save(updated)) {
+      $('edit-dialog').close(); selected.clear(); render(); notify('已保存进度。');
+    }
+  } catch(e) { $('edit-error').textContent=e.message; }
+};
+$('split-edit').onclick=async()=>{
+  const current=rows.find(r=>r.id===editId);
+  if (!current||current.qty<2||current.ship||current.manualAmount!=null||current.volumeMl!=null) return;
+  const entry=prompt('填写要拆出的份数（1 至 '+(current.qty-1)+'）。拆出部分沿用当前交肾和到货进度，容器和原耗材费保留在原明细，可再编辑分配。');
+  if (entry===null) return;
+  const qty=Number(entry);
+  if (!Number.isInteger(qty)||qty<1||qty>=current.qty) {
+    $('edit-error').textContent='请输入有效份数。'; return;
+  }
+  const next=rows.flatMap(r=>r.id!==editId?[r]:[{...r,qty:r.qty-qty},{...r,id:crypto.randomUUID(),qty,fee:0,containers:undefined,defaultTube:false,defaultGlass:false,wantsBottle:false}]);
+  if (await save(next)) { $('edit-dialog').close(); selected.clear(); render(); notify('已拆分，可以分别登记到货。'); }
+};
+function memberImpact(){
+  const matches=rows.filter(r=>r.group===$('members-ink').value&&r.member===$('members-existing').value);
+  $('members-impact').textContent=matches.length
+    ? matches.length+' 条 · 应收 '+money(sum(matches))+' · 已交肾 '+matches.filter(r=>r.paid).length+' 条 · 已排发或寄出 '+matches.filter(r=>r.ship).length+' 条'
+    : '没有可移除的团员。';
+  return matches;
+}
+function memberOptions(){
+  const removing=$('members-action').value==='remove';
+  $('members-add').hidden=removing;
+  $('members-remove').hidden=!removing;
+  $('members-save').textContent=removing?'移除团员':'添加认领';
+  const list=rows.filter(r=>r.group===$('members-ink').value);
+  $('members-existing').innerHTML=unique(list.map(r=>r.member)).map(name=>'<option value="'+esc(name)+'">'+esc(name)+'</option>').join('');
+  const specs=unique(list.map(r=>r.item));
+  const first=list[0];
+  $('members-spec').value=specs.length===1?first.item:'';
+  $('members-price').value=specs.length===1&&list.every(r=>r.price===first.price)?(first.price/100).toFixed(2):'';
+  memberImpact();
+}
+$('members-open').onclick=async()=>{
+  try {
+    await loadRows(); render();
+    const inks=unique([...rows.map(r=>r.group),...[...excludedMembers].map(pair=>JSON.parse(pair)[0])]);
+    if(!inks.length){notify('请先导入排表。');return;}
+    $('members-ink').innerHTML=inks.map(ink=>'<option value="'+esc(ink)+'">'+esc(ink)+'</option>').join('');
+    if(inks.includes(group)) $('members-ink').value=group;
+    $('members-action').value='add';
+    $('members-name').value='';$('members-qty').value='1';$('members-bottle').checked=false;
+    $('members-error').textContent='';
+    memberOptions();$('members-dialog').showModal();
+  }catch(e){notify(e.message);}
+};
+$('members-ink').onchange=memberOptions;
+$('members-action').onchange=memberOptions;
+$('members-existing').onchange=memberImpact;
+$('members-save').onclick=async()=>{
+  const button=$('members-save');
+  button.disabled=true;
+  $('members-error').textContent='';
+  try{
+    const ink=$('members-ink').value;
+    const remove=$('members-action').value==='remove';
+    const member=(remove?$('members-existing'):$('members-name')).value.trim();
+    if(!member) throw Error('请选择或填写团员昵称。');
+    let next;
+    if(remove){
+      const matches=memberImpact();
+      if(!matches.length) throw Error('没有可移除的明细。');
+      if(!confirm('移除「'+member+'」在「'+ink+'」的全部 '+matches.length+' 条明细（应收 '+money(sum(matches))+'）？重新导入排表也会跳过此团员。')) return;
+      const ids=new Set(matches.map(r=>r.id));
+      next=rows.filter(r=>!ids.has(r.id));
+    }else{
+      const item=$('members-spec').value.trim(), qty=Number($('members-qty').value);
+      const price=cents($('members-price').value,'每份单价');
+      const ml=Number(item.match(/^(\d+(?:\.\d+)?)\s*(?:ml\b|毫升)/i)?.[1]??0);
+      const wantsBottle=$('members-bottle').checked;
+      const id=JSON.stringify([ink,member,item,price]);
+      if(isBottleOption(item)) throw Error('请填写墨水规格，瓶子可在「要瓶」勾选。');
+      if(rows.some(r=>r.id===id)) throw Error('该团员已有相同规格和单价的认领，请先核对已有明细。');
+      const row={id,group:ink,member,item,qty,price,ml,wantsBottle,paid:false,arrived:false,ship:0,tracking:''};
+      if(!validRow(row)) throw Error('请填写有效的规格、份数和单价。');
+      addDefaultContainers([row],rows,wantsBottle?new Set([bottleKey(row)]):new Set());
+      next=[...rows,row];
+    }
+    if(await save(next,{group:ink,member,remove})){
+      $('members-dialog').close();setView('ink','',ink);notify(remove?'已移除团员。':'已添加认领。');
+    }
+  }catch(e){$('members-error').textContent=e.message;}
+  finally{button.disabled=false;}
+};
+let scopePreview=null;
+let scopeBusy=false;
+function resetScopePreview(){
+  scopePreview=null;
+  $('scope-summary').textContent='';
+  $('scope-error').textContent='';
+  $('scope-apply').disabled=true;
+}
+function scopeOptions(){
+  resetScopePreview();
+  const action=$('scope-action').value;
+  const byInk=action==='arrived'||$('scope-mode').value==='ink';
+  $('scope-mode-label').hidden=action==='arrived';
+  const names=unique(rows.filter(r=>!r.demo).map(r=>byInk?r.group:action==='queued'?recipientOf(r):r.member));
+  $('scope-name').querySelector('span').textContent=byInk?'墨水':'团员';
+  $('scope-help').textContent={
+    paid:byInk?'请先核对该墨水所有待付款明细的支付宝实收，再整团确认。':'按原肾表的团员确认。请先核对所选团员全部待付款明细的支付宝实收。',
+    queued:'按实际接单团员排发。只更新已交肾、已归仓且未排发的明细，待确认转单会跳过。',
+    arrived:'确认整种墨水的分装均已归仓后使用。部分归仓可在明细表单独勾选。'
+  }[action];
+  $('scope-target').innerHTML='<option value="">请选择</option>'+names.map(name=>'<option value="'+esc(name)+'">'+esc(name)+'</option>').join('');
+  if(byInk&&names.includes(group)) $('scope-target').value=group;
+}
+async function openScope(ink=''){
+  try {
+    await loadRows();
+    render();
+    for(const id of ['scope-action','scope-target']) $(id).disabled=Boolean(ink);
+    if(ink){
+      $('scope-action').value='arrived';
+      $('scope-mode').value='ink';
+    }
+    scopeOptions();
+    if(ink) $('scope-target').value=ink;
+    $('scope-dialog').showModal();
+    if(ink) await previewScope();
+  } catch(e) { notify(e.message); }
+}
+$('scope-open').onclick=()=>openScope();
+$('scope-action').onchange=scopeOptions;
+$('scope-mode').onchange=scopeOptions;
+$('scope-target').onchange=resetScopePreview;
+async function previewScope(){
+  resetScopePreview();
+  const action=$('scope-action').value, scope=$('scope-target').value, byInk=$('scope-mode').value==='ink';
+  if(!scope){$('scope-error').textContent='请先选择对象。';return;}
+  try {
+    const result=await api('admin/batch',{action,scope,byInk});
+    if(!$('scope-dialog').open||action!==$('scope-action').value||scope!==$('scope-target').value||byInk!==($('scope-mode').value==='ink')) return;
+    scopePreview={action,scope,byInk,ids:result.ids,revision:result.revision};
+    $('scope-summary').textContent='可更新 '+result.ids.length+' 条 · 跳过 '+result.skipped+' 条'+(action==='paid'?' · 待收 '+money(result.amount):'');
+    $('scope-apply').disabled=!result.ids.length;
+  }catch(e){$('scope-error').textContent=e.message;}
+}
+$('scope-preview').onclick=previewScope;
+$('scope-apply').onclick=async()=>{
+  if(!scopePreview||scopeBusy) return;
+  scopeBusy=true;
+  $('scope-apply').disabled=true;
+  try {
+    const result=await api('admin/batch',scopePreview);
+    $('scope-dialog').close();
+    notify('已更新 '+result.count+' 条明细。');
+    await loadRows(); selected.clear(); render();
+  }catch(e){resetScopePreview();if($('scope-dialog').open) $('scope-error').textContent=e.message;else notify(e.message);}
+  finally{scopeBusy=false;}
+};
+async function runBatch(action) {
+  const targets=rows.filter(r=>selected.has(r.id));
+  if (!targets.length) return;
+  if (targets.some(r=>r.cancelled)&&!['merge','delete'].includes(action)) return notify('请先取消勾选已散团明细。');
+  if (action==='merge') {
+    if (targets.length<2||new Set(targets.map(bottleKey)).size!==1) {
+      notify('请选择同一团员、同一种墨水的两条或更多明细。'); return;
+    }
+    expandedOrders.delete(bottleKey(targets[0]));
+    selected.clear(); render(); notify('已按团员和墨水汇总显示。');
+    return;
+  }
+  if (action==='delete') {
+    if (saving) return;
+    const paid=targets.filter(r=>r.paid).length;
+    const shipped=targets.filter(r=>r.ship).length;
+    const message='删除所选 '+targets.length+' 条明细？当前应收合计 '+money(sum(targets))+
+      '，其中 '+paid+' 条已交肾，'+shipped+' 条已排发或寄出。删除会重新计算对应墨水的耗材费用。';
+    if (!confirm(message)) return;
+    saving=true;
+    try {
+      const result=await api('admin/delete-rows',{ids:targets.map(r=>r.id),revision});
+      rows=result.rows;
+      revision=result.revision;
+      selected.clear(); render(); notify('已删除 '+result.count+' 条明细。');
+    } catch(e) { notify(e.message); }
+    finally { saving=false; }
+    return;
+  }
+  if (action==='queued' && targets.some(r=>!r.paid||!r.arrived||r.ship)) {
+    notify('加入排发前，请确认所选明细均已交肾、已归仓且未排发。'); return;
+  }
+  let update={paid:{paid:true},arrived:{arrived:true},queued:{ship:1},postagePaid:{postagePaid:true}}[action];
+  if (action==='sent') {
+    try { await refreshTransfers(); } catch(e) { notify(e.message); return; }
+    if (targets.some(r=>r.ship!==1||recipientOf(r)!==recipientOf(targets[0]))) {
+      notify('请选择同一团员、均已排发的明细。'); return;
+    }
+    const tracking=prompt('填写 '+recipientOf(targets[0])+' 这 '+targets.length+' 条明细共用的快递单号。');
+    if (tracking===null) return;
+    if (!tracking.trim()||tracking.trim().length>100) {
+      notify('请填写有效的快递单号。'); return;
+    }
+    update={ship:2,tracking:tracking.trim(),sentAt:new Date().toISOString()};
+  }
+  if (await save(rows.map(r=>selected.has(r.id)?{...r,...update}:r))) {
+    selected.clear(); render(); notify('已更新 '+targets.length+' 条明细。');
+  }
+}
+let billImage=null;
+const billImagePageSize=20;
+function drawBillImage(ink, records, page, pageCount) {
+  const canvas=document.createElement('canvas');
+  const ctx=canvas.getContext('2d');
+  const width=1080, margin=48, rowHeight=88;
+  const headerLines=[];
+  let line='';
+  ctx.font='600 40px sans-serif';
+  for(const char of ink){
+    if(line&&ctx.measureText(line+char).width>width-2*margin){headerLines.push(line);line='';}
+    line+=char;
+  }
+  headerLines.push(line);
+  const top=150+headerLines.length*52;
+  canvas.width=width;
+  canvas.height=top+66+records.length*rowHeight+42;
+  function label(value,x,y,options={}){
+    const {size=32,bold=false,color='#243b32',align='left',max}=options;
+    ctx.font=(bold?'600 ':'')+size+'px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillStyle=color;
+    ctx.textAlign=align;
+    ctx.textBaseline='middle';
+    ctx.fillText(String(value),x,y,max);
+  }
+  ctx.fillStyle='#ffffff';
+  ctx.fillRect(0,0,width,canvas.height);
+  ctx.fillStyle='#e7efdc';
+  ctx.fillRect(0,0,width,top);
+  label(branding.name+' · 肾表',margin,56,{size:46,bold:true});
+  headerLines.forEach((text,index)=>label(text,margin,115+index*52,{size:38,bold:true,max:width-2*margin}));
+  const stamp=new Date().toLocaleDateString('zh-CN',{timeZone:'Asia/Shanghai'});
+  label(stamp+'  ·  '+page+' / '+pageCount,margin,top-34,{size:25,color:'#4a6356'});
+  const x={member:margin,volume:600,amount:820,status:1032};
+  const columns=[['团员','member'],['认领量','volume'],['本单应收','amount'],['交肾状态','status']];
+  columns.forEach(([title,key])=>label(title,x[key],top+33,{size:27,bold:true,align:key==='member'?'left':'right'}));
+  records.forEach((bill,index)=>{
+    const y=top+66+index*rowHeight;
+    ctx.fillStyle=index%2?'#ffffff':'#f5f8f2';
+    ctx.fillRect(0,y,width,rowHeight);
+    const notes=[bill.records.some(wantsBottle)?'要瓶':'',bill.separate?'田宫瓶另单 '+money(bill.separate):''].filter(Boolean).join(' · ');
+    const paid=bill.records.every(r=>r.paid);
+    const partial=!paid&&bill.records.some(r=>r.paid);
+    label(bill.member,x.member,y+(notes?27:44),{bold:true,max:380});
+    if(notes) label(notes,x.member,y+61,{size:22,color:'#4a6356',max:380});
+    label(bill.records.every(r=>r.bottleOnly)?'单要瓶':bill.ml?volume(bill.records)+' ml':bill.qty+' 份',x.volume,y+44,{align:'right',max:155});
+    label(money(bill.total),x.amount,y+44,{bold:true,align:'right',max:190});
+    label(paid?'已交肾':partial?'部分已交':'未交肾',x.status,y+44,{size:27,bold:true,align:'right',color:paid?'#266147':'#89571f'});
+  });
+  return canvas;
+}
+function showBillImage(){
+  const {ink,records,page,pageCount}=billImage;
+  const start=(page-1)*billImagePageSize;
+  const canvas=drawBillImage(ink,records.slice(start,start+billImagePageSize),page,pageCount);
+  billImage.url=canvas.toDataURL('image/jpeg',0.93);
+  $('bill-image-preview').src=billImage.url;
+  $('bill-image-page').textContent='第 '+page+' / '+pageCount+' 张 · 共 '+records.length+' 位团员';
+  $('bill-image-prev').disabled=page===1;
+  $('bill-image-next').disabled=page===pageCount;
+}
+function exportBillImage(list){
+  if(!list.length) return notify('当前没有可导出的记录。');
+  const inks=unique(list.map(r=>r.group));
+  if(inks.length!==1){notify('请先在「全部墨水」下拉框中选择一款墨水。');$('group').focus();return;}
+  const records=sortByAmount(bills(list),bill=>bill.total);
+  billImage={ink:inkTitle(inks[0]),records,page:1,pageCount:Math.ceil(records.length/billImagePageSize)};
+  showBillImage();
+  $('bill-image-dialog').showModal();
+}
+$('bill-image-prev').onclick=()=>{if(billImage.page>1){billImage.page--;showBillImage();}};
+$('bill-image-next').onclick=()=>{if(billImage.page<billImage.pageCount){billImage.page++;showBillImage();}};
+$('bill-image-download').onclick=()=>{
+  const link=document.createElement('a');
+  link.href=billImage.url;
+  link.download=branding.name+'-肾表-'+billImage.ink.replace(/[\\/:*?"<>|]/g,'-')+'-'+billImage.page+'.jpg';
+  link.click();
+};
+let repriceRequest=null;
+function resetReprice(){
+  repriceRequest=null;
+  $('reprice-apply').disabled=true;
+  $('reprice-result').textContent='';
+}
+function openReprice(ink){
+  resetReprice();
+  const pricing=rows.find(r=>r.group===ink&&r.bottlePricing)?.bottlePricing;
+  const original=ink.match(/(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)(?:\s*ml)?$/i);
+  $('reprice-ink').textContent=inkTitle(ink);
+  $('reprice-price').value=pricing?pricing.cents/100:original?.[1]??'';
+  $('reprice-capacity').value=pricing?.capacity??original?.[2]??'';
+  $('reprice-dialog').showModal();
+}
+$('reprice-price').oninput=resetReprice;
+$('reprice-capacity').oninput=resetReprice;
+$('reprice-preview').onclick=async()=>{
+  resetReprice();
+  const price=$('reprice-price').value, size=$('reprice-capacity').value, ink=group;
+  try{
+    const request={group:ink,cents:cents(price,'整瓶价格'),capacity:Number(size)};
+    const result=await api('admin/reprice',request);
+    if(!$('reprice-dialog').open||price!==$('reprice-price').value||size!==$('reprice-capacity').value||group!==ink) return;
+    repriceRequest={...request,revision:result.revision};
+    $('reprice-result').textContent=result.count+' 条 · 应收 '+money(result.old)+' → '+money(result.new)+
+      (result.manual?' · 保留 '+result.manual+' 条手动金额':'')+
+      (result.paidDelta?' · 已交肾明细应收'+(result.paidDelta>0?'减少 ':'增加 ')+money(Math.abs(result.paidDelta)):'');
+    $('reprice-apply').disabled=false;
+  }catch(e){$('reprice-result').textContent=e.message;}
+};
+$('reprice-apply').onclick=async()=>{
+  if(!repriceRequest) return;
+  const request=repriceRequest;
+  resetReprice();
+  try{
+    await api('admin/reprice',request);
+    $('reprice-dialog').close();
+    await loadRows(); render(); notify('整瓶价格已更新。');
+  }catch(e){$('reprice-result').textContent=e.message;}
+};
+function exportCurrent(list) {
+  if (!list.length) return notify('当前没有可导出的记录。');
+  if (view==='bill') {
+    const details=[];
+    for (const g of unique(list.map(r=>r.group))) {
+      details.push([g]);
+      details.push(['团员','数量（ml）','要瓶','本单容器','计入应收的耗材（元）','田宫瓶另单','田宫瓶另单（元）','本单应收（元）','到货','交肾','排发','规格明细']);
+      for (const b of bills(list.filter(r=>r.group===g))) {
+        const records=list.filter(r=>r.group===g&&r.member===b.member);
+        const summary=values=>unique(values).join(' / ');
+        details.push([b.member,volume(records)||'',records.some(wantsBottle)?'要瓶':'',regularDetails(records),b.fee/100,containerDetails(records,true),b.separate/100,b.total/100,
+          summary(records.map(r=>r.arrived?'已归仓':'未归仓')),summary(records.map(r=>r.paid?'已交肾':'未交肾')),
+          summary(records.map(r=>['未排发','已排发','已寄出'][r.ship])),records.map(r=>r.item+' × '+r.qty).join(' / ')]);
+      }
+      details.push([]);
+    }
+    exportCsv(branding.name+'-肾表.csv',details[0],details.slice(1));
+  } else {
+    exportCsv(branding.name+'-'+(view==='ship'?'排发清单':'认领明细')+'.csv',['墨水','原认领团员','排发团员','规格','份数','数量（ml）','要瓶','本单容器','计入应收的耗材（元）','田宫瓶另单','田宫瓶另单（元）','本单应收（元）','交肾','到货','分装去向','排发','邮费状态','快递单号'],list.map(r=>[r.group,r.member,recipientOf(r),r.item,r.qty,volume([r])||'',wantsBottle(r)?'要瓶':'',regularDetails([r]),chargedFee(r)/100,containerDetails([r],true),containerAmount(r,true)/100,amount(r)/100,r.paid?'已交肾':'未交肾',r.arrived?'已归仓':'未归仓',r.handoff??'', ['未排发','已排发','已寄出'][r.ship],r.postagePaid===true?'已付邮费':'邮费待确认',r.tracking]));
+  }
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');
+  if (!b) return;
+  const d=b.dataset;
+  if (d.status) { status=status===d.status?'':d.status; selected.clear(); render(); }
+  if (d.view) setView(d.view);
+  if (d.close) $(d.close).close();
+  if (d.edit) openEdit(d.edit);
+  if (d.orderRecipient) {
+    if(openedRecipients.has(d.orderRecipient)) openedRecipients.delete(d.orderRecipient);
+    else openedRecipients.add(d.orderRecipient);
+    render();
+    [...document.querySelectorAll('[data-order-recipient]')].find(button=>button.dataset.orderRecipient===d.orderRecipient)?.focus();
+  }
+  if (d.editTimeline) openTimeline(d.editTimeline);
+  if (b.id==='time-direction') {
+    timeDirection*=-1;
+    renderTimelines();
+    $('time-direction').focus();
+  }
+  if (b.hasAttribute('data-amount-sort')) {
+    amountSort=amountSort===-1?1:-1;
+    render();
+    document.querySelector('[data-amount-sort]')?.focus();
+  }
+  if (d.expandOrder) {
+    if (expandedOrders.has(d.expandOrder)) expandedOrders.delete(d.expandOrder);
+    else expandedOrders.add(d.expandOrder);
+    render();
+  }
+  if (d.member) setView('ink',d.member,d.group);
+  if (d.batch) runBatch(d.batch);
+  if (d.feeInk) setView('ink','',d.feeInk);
+  if (d.action==='cancel-ink'&&view==='ink') {
+    const ink=group;
+    const cancelled=!rows.some(r=>r.group===ink&&r.cancelled);
+    if(confirm((cancelled?'标记散团：':'恢复墨水：')+ink+'？')){
+      api('admin/cancel-ink',{group:ink,cancelled})
+        .then(loadRows).then(()=>{selected.clear();render();notify(cancelled?'已标记散团。':'已恢复墨水。');})
+        .catch(e=>notify(e.message));
+    }
+  }
+  if (d.action==='ink-arrive'&&view==='ink'&&group) openScope(group);
+  if (d.action==='reprice'&&view==='ink'&&group) openReprice(group);
+  if (d.action==='bill-image') exportBillImage(view==='ink'?rows.filter(row=>row.group===group):visibleRows());
+  if (d.action==='export') exportCurrent(visibleRows());
+  if (d.action==='snapshot') present(baseRows(),baseRows()[0].member);
+});
+document.addEventListener('dblclick',event=>{
+  const title=event.target.closest('[data-ink-title]');
+  if(view==='desk'&&title) setView('ink','',title.dataset.inkTitle);
+});
+let searchComposing=false;
+function updateSearch(){
+  const value=$('query').value;
+  if(query===value) return;
+  query=value;
+  selected.clear();
+  render();
+}
+$('query').addEventListener('compositionstart',()=>{searchComposing=true;});
+$('query').addEventListener('compositionend',()=>{searchComposing=false;updateSearch();});
+$('query').addEventListener('input',event=>{
+  if(!searchComposing&&!event.isComposing) updateSearch();
+});
+$('query-clear').onclick=()=>{
+  $('query').value='';
+  searchComposing=false;
+  updateSearch();
+  $('query').focus();
+};
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='time-sort'){
+    timeSort=t.value;
+    renderTimelines();
+    $('time-sort').focus();
+  }
+  if (t.id==='group'||t.id==='status') {
+    if (t.id==='group') group=t.value; else status=t.value;
+    selected.clear(); render();
+  }
+  if (t.dataset.selectGroup) {
+    for (const r of visibleRows().filter(r=>bottleKey(r)===t.dataset.selectGroup)) {
+      if (t.checked) selected.add(r.id); else selected.delete(r.id);
+    }
+    render();
+  }
+  if (t.dataset.select) {
+    if (t.checked) selected.add(t.dataset.select); else selected.delete(t.dataset.select);
+    render();
+  }
+  if (t.dataset.allRecipient) {
+    for(const row of visibleRows().filter(r=>recipientOf(r)===t.dataset.allRecipient)){
+      if(t.checked) selected.add(row.id); else selected.delete(row.id);
+    }
+    render();
+  }
+  if (t.hasAttribute('data-all')) {
+    selected=new Set(t.checked?visibleRows().map(r=>r.id):[]); render();
+  }
+});
+async function refreshTransfers(){
+  transfers=(await api('admin/transfers')).transfers;
+  fulfillment=new Map();
+  for(const transfer of [...transfers].reverse()) {
+    if(transfer.status==='已接单') for(const id of transfer.ids) fulfillment.set(id,transfer.recipient);
+  }
+  const unread=transfers.filter(t=>t.status==='已接单'&&!t.seen).length;
+  $('transfer-open').textContent='转单通知'+(unread?' · '+unread:'');
+}
+function renderTransfers(){
+  $('transfer-list').innerHTML=transfers.filter(t=>t.status==='已接单').map(t=>
+    '<section class="panel" style="padding:12px"><strong>'+esc(t.sender)+' → '+esc(t.recipient)+'</strong><p>'+
+    t.items.map(r=>esc(r.group+' · '+(t.volume_ml==null?r.item+' × '+r.qty:t.volume_ml+' ml'))).join('<br>')+'</p>'+
+    (t.seen?'已阅':'<button class="btn" data-transfer-seen="'+t.id+'">标为已阅</button>')+'</section>'
+  ).join('')||'<p>暂无已确认的转单。</p>';
+}
+$('transfer-open').onclick=async()=>{
+  try{await refreshTransfers();render();renderTransfers();$('transfer-dialog').showModal();}catch(e){notify(e.message);}
+};
+$('transfer-list').onclick=async event=>{
+  const button=event.target.closest('[data-transfer-seen]');
+  if(!button)return;
+  try{await api('admin/transfer-seen',{id:Number(button.dataset.transferSeen)});await refreshTransfers();renderTransfers();}catch(e){notify(e.message);}
+};
+$('timeline-fields').innerHTML=timelineFields.map(([key,label])=>'<label>'+label+' <input id="date-'+key+'" type="datetime-local"></label>').join('');
+function showDates(){
+  const dates=schedules[$('timeline-ink').value]??{};
+  for(const [key] of timelineFields) $('date-'+key).value=dates[key]??'';
+  $('timeline-note').value=dates.note??'';
+  $('timeline-error').textContent='';
+}
+function openTimeline(ink){
+  const groups=unique(rows.filter(r=>!r.demo).map(r=>r.group));
+  if(!groups.length){notify('请先导入墨水排表。');return;}
+  $('timeline-ink').innerHTML=groups.map(g=>'<option>'+esc(g)+'</option>').join('');
+  if(groups.includes(ink)) $('timeline-ink').value=ink;
+  showDates(); $('timeline-dialog').showModal();
+}
+$('timeline-open').onclick=()=>openTimeline(group);
+$('timeline-ink').onchange=showDates;
+$('timeline-save').onclick=async()=>{
+  const button=$('timeline-save');
+  button.disabled=true;
+  try {
+    const dates=Object.fromEntries(timelineFields.map(([key])=>[key,$('date-'+key).value]));
+    schedules=(await api('admin/schedules',{group:$('timeline-ink').value,dates,note:$('timeline-note').value})).schedules;
+    $('timeline-dialog').close(); renderTimelines(); notify('时间线与备注已保存。');
+  } catch(e){$('timeline-error').textContent=e.message;}
+  finally {button.disabled=false;}
+};
+$('logout').onclick=async()=>{
+  try { await api('logout',{}); location.assign('/'); } catch(e) { notify(e.message); }
+};
+async function refreshPaymentCount(){
+  const {count}=await api('admin/pending-count');
+  $('review-open').textContent='审核申请'+(count?' · '+count+' 笔待核款':'');
+}
+async function renderReviews() {
+  const {requests}=await api('admin/requests');
+  const visible=$('review-filter').value==='all'?requests:requests.filter(r=>r.status==='待审核');
+  $('review-list').innerHTML=visible.map(r=>{
+    const targets=rows.filter(order=>r.ids.includes(order.id)&&r.member===(r.kind==='ship'?recipientOf(order):order.member));
+    const items=targets.map(order=>esc(order.group+' · '+order.item+' × '+order.qty)).join('<br>');
+    return '<section class="panel" style="padding:12px"><strong>'+esc(r.member)+' · '+(r.kind==='proof'?'付款确认':'排发申请')+'</strong><p>'+items+'</p><p>'+esc(r.status)+' · '+r.ids.length+' 条'+(r.kind==='proof'?' · 本单应收 '+money(sum(targets))+(r.expected!=null&&r.expected!==sum(targets)?' · 提交时 '+money(r.expected):''):'')+'</p>'+(r.status==='待审核'?'<div class="actions"><button class="btn primary" data-review="approve" data-id="'+r.id+'">通过</button><button class="btn" data-review="reject" data-id="'+r.id+'">退回</button></div>':'')+'</section>';
+  }).join('')||'<p>暂无申请。</p>';
+}
+$('review-filter').onchange=()=>renderReviews().catch(e=>notify(e.message));
+$('review-open').onclick=async()=>{
+  try { await renderReviews(); $('review-dialog').showModal(); } catch(e) { notify(e.message); }
+};
+$('review-list').addEventListener('click',async event=>{
+  const button=event.target.closest('button[data-review]');
+  if (!button) return;
+  button.disabled=true;
+  try {
+    await api('admin/review',{id:Number(button.dataset.id),action:button.dataset.review});
+    await loadRows(); selected.clear(); render(); await Promise.all([renderReviews(),refreshPaymentCount()]);
+  } catch(e) { notify(e.message); button.disabled=false; }
+});
+setInterval(()=>{
+  if(document.hidden) return;
+  refreshTransfers().then(()=>{if($('transfer-dialog').open) renderTransfers();}).catch(()=>{});
+  refreshPaymentCount().catch(()=>{});
+},20000);
+refreshPaymentCount().catch(()=>{});
+loadRows().then(render).catch(e=>{render();notify(e.message);});
+
+$('branding-open').onclick=()=>{
+  $('branding-name').value=branding.name;
+  $('branding-avatar').value='';
+  $('branding-remove').checked=false;
+  $('branding-error').textContent='';
+  $('branding-dialog').showModal();
+};
+$('branding-save').onclick=async()=>{
+  const button=$('branding-save');
+  button.disabled=true;
+  try{
+    const file=$('branding-avatar').files[0];
+    let avatar=$('branding-remove').checked?'':branding.avatar;
+    if(file){
+      if(file.size>280000) throw Error('头像须小于 280 KB。');
+      avatar=await new Promise((resolve,reject)=>{
+        const reader=new FileReader();
+        reader.onload=()=>resolve(reader.result);
+        reader.onerror=()=>reject(Error('无法读取头像。'));
+        reader.readAsDataURL(file);
+      });
+    }
+    applyBranding(await api('branding',{name:$('branding-name').value,avatar}));
+    $('branding-dialog').close();
+    render();
+  }catch(e){$('branding-error').textContent=e.message;}
+  finally{button.disabled=false;}
+};
+api('branding').then(applyBranding).catch(()=>{});
+</script></body></html>
